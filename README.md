@@ -1,1 +1,1 @@
-# Bulk-Products-to-Cart-for-Easy-Digital-Downloads
+# bulk-products-to-cart-for-edd
