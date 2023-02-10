@@ -1,1 +1,1 @@
-# Multiple-Products-to-Cart---Easy-Digital-Downloads-
+# Bulk-Products-to-Cart-for-Easy-Digital-Downloads
