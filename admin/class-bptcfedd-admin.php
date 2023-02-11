@@ -13,8 +13,6 @@
 /**
  * The admin-specific functionality of the plugin.
  *
- * Defines the plugin name, version, and two examples hooks for how to
- * enqueue the admin-specific stylesheet and JavaScript.
  *
  * @package    Bulk_Products_To_Cart_For_Edd
  * @subpackage Bulk_Products_To_Cart_For_Edd/admin
@@ -43,7 +41,7 @@ class Bptcfedd_Admin {
 	/**
 	 * Initialize the class and set its properties.
 	 *
-	 * @since    1.0.0
+	 * @since      1.0.0
 	 * @param      string    $plugin_name       The name of this plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
@@ -51,6 +49,31 @@ class Bptcfedd_Admin {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+
+	}
+
+	public function bptcfedd_add_admin_page(){
+
+		add_submenu_page(
+	    	'edit.php?post_type=bptcfedd_tables',
+            __( 'Settings', 'bptcfedd' ),
+			__( 'Settings', 'bptcfedd' ),
+			'manage_options',
+			'bptcfedd_settings',
+			array($this, 'bptcfedd_add_admin_page_callback')
+        );
+
+	}
+
+	public function bptcfedd_add_admin_page_callback(){
+
+
+
+	}
+
+	public function add_hooks(){
+
+		add_action( 'admin_menu', array($this, 'bptcfedd_add_admin_page') );
 
 	}
 

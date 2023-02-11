@@ -13,8 +13,6 @@
 /**
  * The public-facing functionality of the plugin.
  *
- * Defines the plugin name, version, and two examples hooks for how to
- * enqueue the public-facing stylesheet and JavaScript.
  *
  * @package    Bulk_Products_To_Cart_For_Edd
  * @subpackage Bulk_Products_To_Cart_For_Edd/public

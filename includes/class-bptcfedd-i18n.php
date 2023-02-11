@@ -42,6 +42,10 @@ class Bptcfedd_i18n {
 
 	}
 
+	public function add_hooks(){
 
+		add_action( 'plugins_loaded',  array($this, 'load_plugin_textdomain') );
+
+	}
 
 }

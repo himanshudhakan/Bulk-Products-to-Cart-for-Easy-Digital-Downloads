@@ -30,16 +30,6 @@
 class Bulk_Products_To_Cart_For_Edd {
 
 	/**
-	 * The loader that's responsible for maintaining and registering all hooks that power
-	 * the plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   protected
-	 * @var      Bulk_Products_To_Cart_For_Edd_Loader    $loader    Maintains and registers all hooks for the plugin.
-	 */
-	protected $loader;
-
-	/**
 	 * The instances of classes.
 	 *
 	 * @since    1.0.0
@@ -83,10 +73,6 @@ class Bulk_Products_To_Cart_For_Edd {
 		}
 		$this->plugin_name = 'bulk-products-to-cart-for-edd';
 
-		$this->load_dependencies();
-		$this->set_locale();
-		$this->define_hooks();
-
 	}
 
 	/**
@@ -94,8 +80,8 @@ class Bulk_Products_To_Cart_For_Edd {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Bulk_Products_To_Cart_For_Edd_Loader. Orchestrates the hooks of the plugin.
 	 * - Bulk_Products_To_Cart_For_Edd_i18n. Defines internationalization functionality.
+	 * - Bulk_Products_To_Cart_For_Edd_Init. Defines initialization functionality.
 	 * - Bulk_Products_To_Cart_For_Edd_Admin. Defines all hooks for the admin area.
 	 * - Bulk_Products_To_Cart_For_Edd_Public. Defines all hooks for the public side of the site.
 	 *
@@ -108,16 +94,15 @@ class Bulk_Products_To_Cart_For_Edd {
 	private function load_dependencies() {
 
 		/**
-		 * The class responsible for orchestrating the actions and filters of the
-		 * core plugin.
-		 */
-		require_once BPTCFEDD_INC_DIR_PATH . 'class-bptcfedd-loader.php';
-
-		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
 		require_once BPTCFEDD_INC_DIR_PATH . 'class-bptcfedd-i18n.php';
+
+		/**
+		 * The class responsible for defining all actions for initialization of the plugin.
+		 */
+		require_once BPTCFEDD_INC_DIR_PATH . 'class-bptcfedd-init.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
@@ -130,30 +115,15 @@ class Bulk_Products_To_Cart_For_Edd {
 		 */
 		require_once BPTCFEDD_PUBLIC_DIR_PATH . 'class-bptcfedd-public.php';
 
-		$this->loader = new Bptcfedd_Loader();
-
+		$plugin_i18n = new Bptcfedd_i18n();
+		$plugin_init = new Bptcfedd_Init();
 		$plugin_admin = new Bptcfedd_Admin( $this->get_plugin_name(), $this->get_version() );
 		$plugin_public = new Bptcfedd_Public( $this->get_plugin_name(), $this->get_version() );
 
+		$this->classes['i18n'] = $plugin_i18n;
+		$this->classes['init'] = $plugin_init;
 		$this->classes['admin'] = $plugin_admin;
 		$this->classes['public'] = $plugin_public;
-
-	}
-
-	/**
-	 * Define the locale for this plugin for internationalization.
-	 *
-	 * Uses the Bulk_Products_To_Cart_For_Edd_i18n class in order to set the domain and to register the hook
-	 * with WordPress.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 */
-	private function set_locale() {
-
-		$plugin_i18n = new Bptcfedd_i18n();
-
-		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
 	}
 
@@ -187,7 +157,10 @@ class Bulk_Products_To_Cart_For_Edd {
 	 * @since    1.0.0
 	 */
 	public function run() {
-		$this->loader->run();
+		
+		$this->load_dependencies();
+		$this->define_hooks();
+
 	}
 
 	/**
@@ -199,16 +172,6 @@ class Bulk_Products_To_Cart_For_Edd {
 	 */
 	public function get_plugin_name() {
 		return $this->plugin_name;
-	}
-
-	/**
-	 * The reference to the class that orchestrates the hooks with the plugin.
-	 *
-	 * @since     1.0.0
-	 * @return    Bulk_Products_To_Cart_For_Edd_Loader    Orchestrates the hooks of the plugin.
-	 */
-	public function get_loader() {
-		return $this->loader;
 	}
 
 	/**
