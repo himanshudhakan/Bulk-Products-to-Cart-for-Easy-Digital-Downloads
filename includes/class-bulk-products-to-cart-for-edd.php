@@ -40,6 +40,15 @@ class Bulk_Products_To_Cart_For_Edd {
 	protected $loader;
 
 	/**
+	 * The instances of classes.
+	 *
+	 * @since    1.0.0
+	 * @access   protected
+	 * @var      array    $classes    The instances of all classes.
+	 */
+	protected $classes;
+
+	/**
 	 * The unique identifier of this plugin.
 	 *
 	 * @since    1.0.0
@@ -76,8 +85,7 @@ class Bulk_Products_To_Cart_For_Edd {
 
 		$this->load_dependencies();
 		$this->set_locale();
-		$this->define_admin_hooks();
-		$this->define_public_hooks();
+		$this->define_hooks();
 
 	}
 
@@ -124,6 +132,12 @@ class Bulk_Products_To_Cart_For_Edd {
 
 		$this->loader = new BPTCFEDD_Loader();
 
+		$plugin_admin = new BPTCFEDD_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new BPTCFEDD_Public( $this->get_plugin_name(), $this->get_version() );
+
+		$this->classes['admin'] = $plugin_admin;
+		$this->classes['public'] = $plugin_public;
+
 	}
 
 	/**
@@ -144,19 +158,26 @@ class Bulk_Products_To_Cart_For_Edd {
 	}
 
 	/**
-	 * Register all of the hooks related to the admin area functionality
-	 * of the plugin.
+	 * Register all of the hooks of the plugin.
 	 *
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function define_admin_hooks() {
+	private function define_hooks() {
 
-		$plugin_admin = new BPTCFEDD_Admin( $this->get_plugin_name(), $this->get_version() );
-		$plugin_public = new BPTCFEDD_Public( $this->get_plugin_name(), $this->get_version() );
+		if ( !empty( $this->classes ) ) {
+			
+			foreach ($this->classes as $key => $object) {
+				
+				if ( method_exists($object, 'add_hooks') ) {
+					
+					$object->add_hooks();
 
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+				}
+
+			}
+
+		}
 
 	}
 
