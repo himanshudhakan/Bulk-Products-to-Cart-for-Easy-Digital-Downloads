@@ -20,7 +20,7 @@
  * @subpackage Bulk_Products_To_Cart_For_Edd/public
  * @author     Himanshu Dhakan <himanshudhakan9@gmail.com>
  */
-class BPTCFEDD_Public {
+class Bptcfedd_Public {
 
 	/**
 	 * The ID of this plugin.

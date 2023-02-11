@@ -24,7 +24,7 @@
  * @subpackage Bulk_Products_To_Cart_For_Edd/includes
  * @author     Himanshu Dhakan <himanshudhakan9@gmail.com>
  */
-class BPTCFEDD_i18n {
+class Bptcfedd_i18n {
 
 
 	/**

@@ -21,7 +21,7 @@
  * @subpackage Bulk_Products_To_Cart_For_Edd/includes
  * @author     Himanshu Dhakan <himanshudhakan9@gmail.com>
  */
-class BPTCFEDD_Loader {
+class Bptcfedd_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.

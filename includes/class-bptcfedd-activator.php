@@ -20,7 +20,7 @@
  * @subpackage Bulk_Products_To_Cart_For_Edd/includes
  * @author     Himanshu Dhakan <himanshudhakan9@gmail.com>
  */
-class BPTCFEDD_Activator {
+class Bptcfedd_Activator {
 
 	/**
 	 * Activation method

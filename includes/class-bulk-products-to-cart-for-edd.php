@@ -122,18 +122,18 @@ class Bulk_Products_To_Cart_For_Edd {
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once BPTCFEDD_ADMIN_DIR_PATH . 'admin/class-bptcfedd-admin.php';
+		require_once BPTCFEDD_ADMIN_DIR_PATH . 'class-bptcfedd-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once BPTCFEDD_PUBLIC_DIR_PATH . 'public/class-bptcfedd-public.php';
+		require_once BPTCFEDD_PUBLIC_DIR_PATH . 'class-bptcfedd-public.php';
 
-		$this->loader = new BPTCFEDD_Loader();
+		$this->loader = new Bptcfedd_Loader();
 
-		$plugin_admin = new BPTCFEDD_Admin( $this->get_plugin_name(), $this->get_version() );
-		$plugin_public = new BPTCFEDD_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new Bptcfedd_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new Bptcfedd_Public( $this->get_plugin_name(), $this->get_version() );
 
 		$this->classes['admin'] = $plugin_admin;
 		$this->classes['public'] = $plugin_public;
@@ -151,7 +151,7 @@ class Bulk_Products_To_Cart_For_Edd {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new BPTCFEDD_i18n();
+		$plugin_i18n = new Bptcfedd_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
