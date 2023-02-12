@@ -21,7 +21,11 @@
 class Bptcfedd_Admin_Settings {
 
 
-	 
+	public function add_hooks(){
+
+		
+		
+	} 
 
 
 }
