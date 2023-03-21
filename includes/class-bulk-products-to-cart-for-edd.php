@@ -79,7 +79,8 @@ class Bulk_Products_To_Cart_For_Edd {
 	 * Load the required dependencies for this plugin.
 	 *
 	 * Include the following files that make up the plugin:
-	 *
+	 * 
+	 * - Defines core functions available on both the front-end and admin.
 	 * - Bulk_Products_To_Cart_For_Edd_i18n. Defines internationalization functionality.
 	 * - Bulk_Products_To_Cart_For_Edd_Init. Defines initialization functionality.
 	 * - Bulk_Products_To_Cart_For_Edd_Admin. Defines all hooks for the admin area.
@@ -92,6 +93,11 @@ class Bulk_Products_To_Cart_For_Edd {
 	 * @access   private
 	 */
 	private function load_dependencies() {
+
+		/**
+		 * The core functions available on both the front-end and admin of the plugin.
+		 */
+		require_once BPTCFEDD_INC_DIR_PATH . 'bptcfedd-functions.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality

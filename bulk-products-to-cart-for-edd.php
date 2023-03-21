@@ -56,6 +56,11 @@ define( 'BPTCFEDD_ADMIN_DIR_PATH', BPTCFEDD_PLUGIN_DIR_PATH . 'admin/' );
 define( 'BPTCFEDD_ADMIN_DIR_URL', BPTCFEDD_PLUGIN_DIR_URL . 'admin/' );
 
 /**
+ * Admin template dir path.
+ */
+define( 'BPTCFEDD_ADMIN_TEMPLATE_PATH', BPTCFEDD_ADMIN_DIR_PATH . 'partials/' );
+
+/**
  * Public dir path.
  */
 define( 'BPTCFEDD_PUBLIC_DIR_PATH', BPTCFEDD_PLUGIN_DIR_PATH . 'public/' );
@@ -64,6 +69,22 @@ define( 'BPTCFEDD_PUBLIC_DIR_PATH', BPTCFEDD_PLUGIN_DIR_PATH . 'public/' );
  * Public dir url.
  */
 define( 'BPTCFEDD_PUBLIC_DIR_URL', BPTCFEDD_PLUGIN_DIR_URL . 'public/' );
+
+/**
+ * Public template dir path.
+ */
+define( 'BPTCFEDD_PUBLIC_TEMPLATE_PATH', BPTCFEDD_PLUGIN_DIR_PATH . 'partials/' );
+
+/**
+ * Public dir path.
+ */
+define( 'BPTCFEDD_LIBS_DIR_PATH', BPTCFEDD_PLUGIN_DIR_PATH . 'libs/' );
+
+/**
+ * Public dir url.
+ */
+define( 'BPTCFEDD_LIBS_DIR_URL', BPTCFEDD_PLUGIN_DIR_URL . 'libs/' );
+
 
 
 

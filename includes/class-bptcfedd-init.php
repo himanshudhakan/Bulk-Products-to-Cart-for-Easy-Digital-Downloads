@@ -7,7 +7,7 @@
  * @since      1.0.0
  *
  * @package    Bulk_Products_To_Cart_For_Edd
- * @subpackage Bulk_Products_To_Cart_For_Edd/admin
+ * @subpackage Bulk_Products_To_Cart_For_Edd/includes
  */
 
 /**
@@ -15,7 +15,7 @@
  *
  *
  * @package    Bulk_Products_To_Cart_For_Edd
- * @subpackage Bulk_Products_To_Cart_For_Edd/admin
+ * @subpackage Bulk_Products_To_Cart_For_Edd/includes
  * @author     Himanshu Dhakan <himanshudhakan9@gmail.com>
  */
 class Bptcfedd_Init {
