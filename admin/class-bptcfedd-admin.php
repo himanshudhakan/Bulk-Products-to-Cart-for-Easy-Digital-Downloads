@@ -111,9 +111,11 @@ class Bptcfedd_Admin {
 
 		$post_type = get_post_type();
 		wp_register_style('bptcfedd-select-style', BPTCFEDD_LIBS_DIR_URL . 'css/select2.min.css');
+		wp_register_style('bptcfedd-admin-style', BPTCFEDD_ADMIN_DIR_URL . 'css/admin.css');
 
 		if( in_array($hook_suffix, $this->allowed_screen_id) || in_array($post_type, $this->allowed_post_types) ){
 			wp_enqueue_style('bptcfedd-select-style');
+			wp_enqueue_style('bptcfedd-admin-style');
 		}
 
 	}
