@@ -1,7 +1,7 @@
 <?php
 
 /**
- * The public-facing functionality of the plugin.
+ * The shortcodes functionality of the plugin.
  *
  * @link       https://profiles.wordpress.org/himanshud
  * @since      1.0.0
@@ -11,14 +11,14 @@
  */
 
 /**
- * The public-facing functionality of the plugin.
+ * The shortcodes functionality of the plugin.
  *
  *
  * @package    Bulk_Products_To_Cart_For_Edd
  * @subpackage Bulk_Products_To_Cart_For_Edd/public
  * @author     Himanshu Dhakan <himanshudhakan9@gmail.com>
  */
-class Bptcfedd_Public {
+class Bptcfedd_Shortcodes {
 
 	/**
 	 * The ID of this plugin.
@@ -49,6 +49,37 @@ class Bptcfedd_Public {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+
+	}
+
+	/**
+	 * Display product tabel
+	 * 
+	 * @since    1.0.0
+	 * @param    array    $atts    The shortcode attitudes.
+	 */
+	public function bptcfedd_table_shortcode($atts){
+
+		$atts = shortcode_atts( array(
+			'id' => '',
+		), $atts, 'bptcfedd_table' );
+
+		ob_start();
+
+		bptcfedd_get_template('shortcodes/bptcfedd-table.php', BPTCFEDD_PUBLIC_TEMPLATE_PATH);
+
+		return ob_get_clean();
+
+	}
+
+	/**
+	 * Add all hooks
+	 * 
+	 * @since 	1.0.0
+	 */
+	public function add_hooks(){
+
+		add_shortcode('bptcfedd_table', array($this, 'bptcfedd_table_shortcode') );
 
 	}
 

@@ -2,7 +2,7 @@
 /**
  * General core functions available on both the front-end and admin.
  *
- * @link       https://github.com/himanshudhakan
+ * @link       https://profiles.wordpress.org/himanshud
  * @since      1.0.0
  *
  * @package    Bulk_Products_To_Cart_For_Edd
@@ -77,4 +77,73 @@ function bptcfedd_search_downloads( $by = 'title', $value = '' ){
 
 	return $response;
 
+}
+
+/**
+ * Get the array of types of orders.
+ *
+ * @since 	1.0.0
+ * @return  array     $orders       The array of orders.
+ */
+function bptcfedd_get_def_orders(){
+
+	$orders = array(
+		'asc' 	=> esc_html__('Ascending', 'bptcfedd'),
+		'desc' 	=> esc_html__('Descending', 'bptcfedd')
+	);
+
+	return $orders;
+
+}
+
+/**
+ * Get the array of order bys.
+ *
+ * @since 	1.0.0
+ * @return  array     $order_bys       The array of order bys.
+ */
+function bptcfedd_get_def_order_bys(){
+
+	$order_bys = array(
+		'title' 	=> esc_html__('Title', 'bptcfedd'),
+		'date' 		=> esc_html__('Date', 'bptcfedd'),
+		'id' 		=> esc_html__('ID', 'bptcfedd'),
+		'modified' 	=> esc_html__('Modified', 'bptcfedd'),
+		'rand' 		=> esc_html__('Random', 'bptcfedd'),
+	);
+
+	return $order_bys;
+
+}
+
+/**
+ * Get sanitized value.
+ *
+ * @since 	1.0.0
+ * @param   mixed    $value    The value to sanitize.
+ * @return  mixed    $value    The sanitized value.
+ */
+function bptcfedd_sanitize_text_field($value){
+
+	if ( empty( $value ) ) {
+		return false;
+	}
+
+	if ( is_array( $value ) ) {
+
+		$sanitize_arr = array();
+		foreach ($value as $skey => $svalue) {
+			$sanitize_arr[$skey] = bptcfedd_sanitize_text_field( $svalue );
+		}
+		$value = $sanitize_arr;
+
+	}else{
+		$value = sanitize_text_field($value);	
+	}
+
+	return $value;
+}
+
+function bptcfedd_get_table_settings(){
+	
 }

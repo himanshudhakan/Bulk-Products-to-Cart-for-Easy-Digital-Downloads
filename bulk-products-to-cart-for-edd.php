@@ -3,17 +3,17 @@
 /**
  * The plugin bootstrap file
  *
- * @link              https://github.com/himanshudhakan
+ * @link              https://profiles.wordpress.org/himanshud
  * @since             1.0.0
  * @package           Bulk_Products_To_Cart_For_Edd
  *
  * @wordpress-plugin
  * Plugin Name:       Bulk Products to Cart for Easy Digital Downloads
- * Plugin URI:        https://github.com/himanshudhakan/bulk-products-to-cart-for-edd
+ * Plugin URI:        https://profiles.wordpress.org/himanshud/
  * Description:       -
  * Version:           1.0.0
  * Author:            Himanshu Dhakan
- * Author URI:        https://github.com/himanshudhakan
+ * Author URI:        https://profiles.wordpress.org/himanshud
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       bptcfedd

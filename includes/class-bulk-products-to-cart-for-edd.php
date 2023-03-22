@@ -6,7 +6,7 @@
  * A class definition that includes attributes and functions used across both the
  * public-facing side of the site and the admin area.
  *
- * @link       https://github.com/himanshudhakan
+ * @link       https://profiles.wordpress.org/himanshud
  * @since      1.0.0
  *
  * @package    Bulk_Products_To_Cart_For_Edd
@@ -117,19 +117,26 @@ class Bulk_Products_To_Cart_For_Edd {
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
-		 * side of the site.
+		 * side of the plugin.
 		 */
 		require_once BPTCFEDD_PUBLIC_DIR_PATH . 'class-bptcfedd-public.php';
+
+		/**
+		 * The class responsible for defining all shortcodes of the plugin.
+		 */
+		require_once BPTCFEDD_PUBLIC_DIR_PATH . 'class-bptcfedd-shortcodes.php';
 
 		$plugin_i18n = new Bptcfedd_i18n();
 		$plugin_init = new Bptcfedd_Init();
 		$plugin_admin = new Bptcfedd_Admin( $this->get_plugin_name(), $this->get_version() );
 		$plugin_public = new Bptcfedd_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_shortcodes = new Bptcfedd_Shortcodes( $this->get_plugin_name(), $this->get_version() );
 
 		$this->classes['i18n'] = $plugin_i18n;
 		$this->classes['init'] = $plugin_init;
 		$this->classes['admin'] = $plugin_admin;
 		$this->classes['public'] = $plugin_public;
+		$this->classes['shortcodes'] = $plugin_shortcodes;
 
 	}
 

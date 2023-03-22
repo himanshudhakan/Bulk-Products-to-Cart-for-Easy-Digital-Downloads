@@ -1,11 +1,14 @@
 .bptcfedd-field{
 	width: 50%;
 	display: flex;
-	margin: 8px 0;
+	margin: 15px 0;
 }
 .bptcfedd-field label{
 	width: 40%;
 }
 .bptcfedd-field select{
 	width: 60%;
+}
+input[type="checkbox"].bptcfedd-simple-checkbox{
+	margin: 0;
 }

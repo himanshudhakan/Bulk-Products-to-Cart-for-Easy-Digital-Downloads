@@ -13,7 +13,7 @@
  * - Repeat with other user roles. Best directly by using the links/query string parameters.
  * - Repeat things for multisite. Once for a single site in the network, once sitewide.
  *
- * @link       https://github.com/himanshudhakan
+ * @link       https://profiles.wordpress.org/himanshud
  * @since      1.0.0
  *
  * @package    Bulk_Products_To_Cart_For_Edd

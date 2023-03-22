@@ -3,7 +3,7 @@
 /**
  * The admin-specific functionality of the plugin.
  *
- * @link       https://github.com/himanshudhakan
+ * @link       https://profiles.wordpress.org/himanshud
  * @since      1.0.0
  *
  * @package    Bulk_Products_To_Cart_For_Edd
@@ -202,12 +202,47 @@ class Bptcfedd_Admin {
 		wp_send_json($respons);
 	}
 
+	/**
+	 * Save table post meta data
+	 *
+	 * @since 	1.0.0
+	 * @param   int        $download_id    The post id.
+	 * @param   WP_Post    $download       The post object.
+	 */
+	public function bptcfedd_save_metadata( $download_id, $download ){
+
+		if ( ! isset( $_POST['bptcfedd_table_meta_nonce'] ) || ! wp_verify_nonce( $_POST['bptcfedd_table_meta_nonce'], 'bptcfedd_table_meta' ) ) {
+			return;
+		}
+
+		if ( ! current_user_can( 'edit_post', $download_id ) ) {
+		   return;
+		}
+
+		if ( isset( $_POST['bptcfedd_columns'] ) ) {
+			$sani_bptcfedd_columns = bptcfedd_sanitize_text_field($_POST['bptcfedd_columns']);
+			update_post_meta($download_id, 'bptcfedd_columns', $sani_bptcfedd_columns);
+		}
+
+		if ( isset( $_POST['bptcfedd_conditions'] ) ) {
+			$sani_bptcfedd_conditions = bptcfedd_sanitize_text_field($_POST['bptcfedd_conditions']);
+			update_post_meta($download_id, 'bptcfedd_conditions', $sani_bptcfedd_conditions);
+		}
+
+	}
+
+	/**
+	 * Add all hooks
+	 * 
+	 * @since 	1.0.0
+	 */
 	public function add_hooks(){
 
 		add_action( 'admin_menu', array($this, 'bptcfedd_add_admin_page') );
 		add_action( 'admin_enqueue_scripts', array($this, 'bptcfedd_enqueue_scripts') );
 		add_action( 'admin_enqueue_scripts', array($this, 'bptcfedd_enqueue_styles') );
 		add_action( 'add_meta_boxes', array( $this, 'bptcfedd_add_meta_boxes' ) );
+		add_action( 'save_post_bptcfedd_tables', array( $this, 'bptcfedd_save_metadata' ), 10, 2 );
 		add_action( 'wp_ajax_bptcfedd_search_downloads', array($this, 'bptcfedd_search_downloads_callback') );
 
 	}

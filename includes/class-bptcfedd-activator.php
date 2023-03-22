@@ -3,7 +3,7 @@
 /**
  * Fired during plugin activation
  *
- * @link       https://github.com/himanshudhakan
+ * @link       https://profiles.wordpress.org/himanshud
  * @since      1.0.0
  *
  * @package    Bulk_Products_To_Cart_For_Edd
