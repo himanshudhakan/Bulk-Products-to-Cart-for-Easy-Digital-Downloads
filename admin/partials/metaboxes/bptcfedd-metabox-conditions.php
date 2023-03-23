@@ -22,8 +22,8 @@ $downloads_tags = bptcfedd_get_terms('download_tag', array(
 $all_orders = bptcfedd_get_def_orders();
 $all_order_bys = bptcfedd_get_def_order_bys();
 
-$download_id = get_the_ID();
-$bptcfedd_conditions = get_post_meta($download_id, 'bptcfedd_conditions', true);
+$table_id = get_the_ID();
+$bptcfedd_conditions = get_post_meta($table_id, 'bptcfedd_conditions', true);
 $downloads = isset( $bptcfedd_conditions['downloads'] ) ? 
 	$bptcfedd_conditions['downloads'] : 
 	array();

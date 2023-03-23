@@ -39,6 +39,33 @@ class Bptcfedd_Admin {
 	private $version;
 
 	/**
+	 * The array of allowed screens ids to enqueue scripts.
+	 *
+	 * @since    1.0.0
+	 * @access   public
+	 * @var      array    $allowed_screen_id    The array of screens ids.
+	 */
+	public $allowed_screen_id;
+
+	/**
+	 * The array of post types to enqueue scripts.
+	 *
+	 * @since    1.0.0
+	 * @access   public
+	 * @var      array    $allowed_post_types    The array of post types.
+	 */
+	public $allowed_post_types;
+
+	/**
+	 * The object of settings calss.
+	 *
+	 * @since    1.0.0
+	 * @access   public
+	 * @var      object    $bptcfedd_settings    The object of settings calss.
+	 */
+	public $bptcfedd_settings;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since 	1.0.0
@@ -55,6 +82,7 @@ class Bptcfedd_Admin {
 		$this->allowed_post_types = array(
 			'bptcfedd_tables',
 		);
+		$this->bptcfedd_settings = new Bptcfedd_Admin_Settings();
 
 	}
 
@@ -67,7 +95,7 @@ class Bptcfedd_Admin {
 
 		add_submenu_page(
 	    	'edit.php?post_type=bptcfedd_tables',
-            __( 'Settings', 'bptcfedd' ),
+            __( 'EDD Product Table Settings', 'bptcfedd' ),
 			__( 'Settings', 'bptcfedd' ),
 			'manage_options',
 			'bptcfedd_settings',
@@ -127,7 +155,10 @@ class Bptcfedd_Admin {
 	 */
 	public function bptcfedd_add_admin_page_callback(){
 
+		global $bptcfedd_settings;
+		$bptcfedd_settings = $this->bptcfedd_settings;
 
+		bptcfedd_get_template('bptcfedd-admin-settings.php', BPTCFEDD_ADMIN_TEMPLATE_PATH);
 
 	}
 

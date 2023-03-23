@@ -12,3 +12,47 @@
 input[type="checkbox"].bptcfedd-simple-checkbox{
 	margin: 0;
 }
+
+/* tab css start */
+
+.bptcfedd-tabs {
+  width: 70%;
+  background-color: #dcdcde;
+  border-radius: 5px 5px 5px 5px;
+}
+ul#bptcfedd-tabs-nav {
+  list-style: none;
+  margin: 0;
+  padding: 5px;
+  overflow: auto;
+}
+ul#bptcfedd-tabs-nav li {
+  float: left;
+  font-weight: bold;
+  margin-right: 2px;
+  padding: 8px 10px;
+  border-radius: 5px 5px 5px 5px;
+  cursor: pointer;
+}
+ul#bptcfedd-tabs-nav li:hover,
+ul#bptcfedd-tabs-nav li.active {
+  background-color: #08E;
+}
+#bptcfedd-tabs-nav li a {
+  text-decoration: none;
+  color: #FFF;
+}
+.bptcfedd-tab-content {
+  padding: 10px;
+  border: 5px solid #f6f7f7;
+  background-color: #f6f7f7;
+}
+
+/* tab css over */
+
+/* settings css start */
+
+.bptcfedd-sub-heading{
+  font-size: 20px;
+  margin: 0px;
+}

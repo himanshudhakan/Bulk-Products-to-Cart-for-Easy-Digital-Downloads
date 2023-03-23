@@ -80,10 +80,34 @@ function bptcfedd_search_downloads( $by = 'title', $value = '' ){
 }
 
 /**
+ * Get the array of types of columns.
+ *
+ * @since 	1.0.0
+ * @return  array     $columns    The array of columns.
+ */
+function bptcfedd_get_def_columns(){
+
+	$columns = array(
+		'checkbox' 		=> esc_html__('Checkbox', 'bptcfedd'),
+		'title' 		=> esc_html__('Title', 'bptcfedd'),
+		'img' 			=> esc_html__('Product Image', 'bptcfedd'),
+		'price' 		=> esc_html__('Price', 'bptcfedd'),
+		'excerpt' 		=> esc_html__('Excerpt', 'bptcfedd'),
+		'addtocart' 	=> esc_html__('Add to cart button', 'bptcfedd'),
+		'cats' 			=> esc_html__('Category', 'bptcfedd'),
+		'tags' 			=> esc_html__('Tags', 'bptcfedd'),
+		'date' 			=> esc_html__('Date', 'bptcfedd'),
+	);
+
+	return $columns;
+
+}
+
+/**
  * Get the array of types of orders.
  *
  * @since 	1.0.0
- * @return  array     $orders       The array of orders.
+ * @return  array     $orders    The array of orders.
  */
 function bptcfedd_get_def_orders(){
 
@@ -100,7 +124,7 @@ function bptcfedd_get_def_orders(){
  * Get the array of order bys.
  *
  * @since 	1.0.0
- * @return  array     $order_bys       The array of order bys.
+ * @return  array     $order_bys    The array of order bys.
  */
 function bptcfedd_get_def_order_bys(){
 
@@ -144,6 +168,9 @@ function bptcfedd_sanitize_text_field($value){
 	return $value;
 }
 
-function bptcfedd_get_table_settings(){
-	
+function bptcfedd_get_table_settings( $table_id ){
+
+	$bptcfedd_columns = get_post_meta($table_id, 'bptcfedd_columns', true);
+	$bptcfedd_conditions = get_post_meta($download_id, 'bptcfedd_conditions', true);
+
 }

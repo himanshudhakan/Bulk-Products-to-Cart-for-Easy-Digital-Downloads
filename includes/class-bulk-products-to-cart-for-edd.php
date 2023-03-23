@@ -116,6 +116,11 @@ class Bulk_Products_To_Cart_For_Edd {
 		require_once BPTCFEDD_ADMIN_DIR_PATH . 'class-bptcfedd-admin.php';
 
 		/**
+		 * The class responsible for defining all settings of this plugin.
+		 */
+		require_once BPTCFEDD_ADMIN_DIR_PATH . 'class-bptcfedd-settings.php';
+
+		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the plugin.
 		 */
@@ -129,12 +134,14 @@ class Bulk_Products_To_Cart_For_Edd {
 		$plugin_i18n = new Bptcfedd_i18n();
 		$plugin_init = new Bptcfedd_Init();
 		$plugin_admin = new Bptcfedd_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_settings = new Bptcfedd_Admin_Settings();
 		$plugin_public = new Bptcfedd_Public( $this->get_plugin_name(), $this->get_version() );
 		$plugin_shortcodes = new Bptcfedd_Shortcodes( $this->get_plugin_name(), $this->get_version() );
 
 		$this->classes['i18n'] = $plugin_i18n;
 		$this->classes['init'] = $plugin_init;
 		$this->classes['admin'] = $plugin_admin;
+		$this->classes['settings'] = $plugin_settings;
 		$this->classes['public'] = $plugin_public;
 		$this->classes['shortcodes'] = $plugin_shortcodes;
 
