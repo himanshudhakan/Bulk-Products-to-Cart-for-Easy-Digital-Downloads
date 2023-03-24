@@ -15,16 +15,18 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 global $bptcfedd_tatts,$table_id;
-//$table_configs = bptcfedd_get_table_configs();
+$table = new Bptcfedd_Product_Table($table_id);
 
 ?>
 <div class="bptcfedd-table-wrap" id="bptcfedd_table_wrap_<?php esc_attr_e($table_id); ?>">
 	<table class="bptcfedd-download-table">
 		<thead>
 			<tr>
-				
+				<?php $table->bptcfedd_display_header(); ?>
 			</tr>
 		</thead>
-		<tbody></tbody>
+		<tbody>
+			<?php $table->bptcfedd_display_body(); ?>
+		</tbody>
 	</table>
 </div>

@@ -263,16 +263,62 @@ function bptcfedd_get_value( $id = '', $tab = '', $default = '' ){
 			}
 		}
 		$value = ! empty( $depth ) ? $depth : $default;
-	}else{
+	}else if ( ! empty( $id ) ) {
 		$value = isset( $settings[$tab][$id] ) ? $settings[$tab][$id] : $default;
+	}else if ( ! empty( $tab ) ) {
+		$value = isset( $settings[$tab] ) ? $settings[$tab] : $default;
+	}else{
+		$value = $default;
 	}
 
 	return $value;
 }
 
+/**
+ * Get all configs of table
+ * 
+ * @since 	  1.0.0
+ * @param     int     $table_id    The table id 
+ * @return    array   $configs     The array of configs
+ */
 function bptcfedd_get_table_configs( $table_id ){
 
 	$bptcfedd_columns = get_post_meta($table_id, 'bptcfedd_columns', true);
-	$bptcfedd_conditions = get_post_meta($download_id, 'bptcfedd_conditions', true);
+	$bptcfedd_conditions = get_post_meta($table_id, 'bptcfedd_conditions', true);
 
+	$configs['columns'] = $bptcfedd_columns;
+	$configs['conditions'] = $bptcfedd_conditions;
+
+	return $configs;
+}
+
+/**
+ * Get all columns of table
+ * 
+ * @since 	  1.0.0
+ * @param     int     $table_id    The table id 
+ * @return    array   $columns     The array of columns
+ */
+function bptcfedd_get_table_columns( $table_id, $tb_columns = array() ){
+
+	$columns = array();
+
+	if ( empty( $tb_columns ) ) {
+		$tb_columns = get_post_meta($table_id, 'bptcfedd_columns', true);
+	}
+	
+	if ( empty( $tb_columns ) ) {
+		return $columns;
+	}
+
+	$all_def_columns = bptcfedd_get_def_columns();
+	$saved_col = bptcfedd_get_value('', 'labels');
+
+	foreach ($tb_columns as $colkey => $value) {
+		$columns[$colkey] = ! empty( $saved_col[$colkey] ) ? 
+			$saved_col[$colkey] :
+				$all_def_columns[$colkey];
+	}
+
+	return $columns;
 }

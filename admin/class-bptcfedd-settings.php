@@ -104,7 +104,7 @@ class Bptcfedd_Admin_Settings {
 				'attributes' => array(
 					'placeholder="'.$column.'"',
 				),
-				'value' => bptcfedd_get_value($cid, $tab, $column),
+				'value' => bptcfedd_get_value($cid, $tab),
 			);
 
 		}
@@ -123,7 +123,7 @@ class Bptcfedd_Admin_Settings {
 				'attributes' => array(
 					'placeholder="'.__('All To Cart', 'bptcfedd').'"',
 				),
-				'value' => bptcfedd_get_value('all_to_cart', $tab, __('All To Cart', 'bptcfedd')),
+				'value' => bptcfedd_get_value('all_to_cart', $tab),
 			),
 		);
 

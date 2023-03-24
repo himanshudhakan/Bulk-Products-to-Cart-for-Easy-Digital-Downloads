@@ -50,7 +50,7 @@ $orderby = isset( $bptcfedd_conditions['orderby'] ) ?
 	'';
 $per_page = isset( $bptcfedd_conditions['per_page'] ) ? 
 	$bptcfedd_conditions['per_page'] : 
-	'10';
+	'-1';
 $pagination = isset( $bptcfedd_conditions['pagination'] ) ? 
 	$bptcfedd_conditions['pagination'] : 
 	'';
@@ -60,7 +60,6 @@ $ajax_pagination = isset( $bptcfedd_conditions['ajax_pagination'] ) ?
 $all_to_cart = isset( $bptcfedd_conditions['all_to_cart'] ) ? 
 	$bptcfedd_conditions['all_to_cart'] : 
 	'';
-
 ?>
 
 <?php wp_nonce_field('bptcfedd_table_meta', 'bptcfedd_table_meta_nonce'); ?>
@@ -70,7 +69,7 @@ $all_to_cart = isset( $bptcfedd_conditions['all_to_cart'] ) ?
 		<select class="bptcfedd-select2" id="bptcfedd_select2_downloads" name="bptcfedd_conditions[downloads][]" multiple="multiple">
 			<?php if( ! empty( $downloads ) ) { ?>
 				<?php foreach ($downloads as $d_id => $download) { ?>
-					<option value="<?php esc_attr_e($d_id); ?>" selected="selected"><?php echo get_the_title($download); ?></option>
+					<option value="<?php esc_attr_e($download); ?>" selected="selected"><?php echo get_the_title(intval($download)); ?></option>
 				<?php } ?>
 			<?php } ?>
 		</select>
@@ -106,7 +105,7 @@ $all_to_cart = isset( $bptcfedd_conditions['all_to_cart'] ) ?
 		<select class="bptcfedd-select2" id="bptcfedd_select2_exclude_downloads" name="bptcfedd_conditions[exclude_downloads][]" multiple="multiple">
 			<?php if( ! empty( $exclude_downloads ) ) { ?>
 				<?php foreach ($exclude_downloads as $ed_id => $exclude_download) { ?>
-					<option value="<?php esc_attr_e($ed_id); ?>"><?php echo $exclude_download; ?></option>
+					<option value="<?php esc_attr_e($exclude_download); ?>" selected="selected"><?php echo get_the_title(intval($exclude_download)); ?></option>
 				<?php } ?>
 			<?php } ?>
 		</select>
@@ -159,7 +158,7 @@ $all_to_cart = isset( $bptcfedd_conditions['all_to_cart'] ) ?
 	</div>
 	<div class="bptcfedd-field">
 		<label for="bptcfedd_per_page"><?php esc_html_e('Downloads per page', 'bptcfedd'); ?></label>
-		<input type="number" name="bptcfedd_conditions[per_page]" id="bptcfedd_per_page" value="<?php esc_attr_e($per_page); ?>" />
+		<input type="number" name="bptcfedd_conditions[per_page]" id="bptcfedd_per_page" value="<?php esc_attr_e($per_page); ?>" min="-1" />
 	</div>
 	<div class="bptcfedd-field">
 		<label for="bptcfedd_pagination"><?php esc_html_e('Pagination', 'bptcfedd'); ?></label>

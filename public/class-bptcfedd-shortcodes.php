@@ -53,7 +53,7 @@ class Bptcfedd_Shortcodes {
 	}
 
 	/**
-	 * Display product tabel
+	 * Display product table
 	 * 
 	 * @since    1.0.0
 	 * @param    array    $atts    The shortcode attitudes.
