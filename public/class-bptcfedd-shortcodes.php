@@ -64,6 +64,14 @@ class Bptcfedd_Shortcodes {
 			'id' => '',
 		), $atts, 'bptcfedd_table' );
 
+		if ( empty( $atts['id'] ) ) {
+			return '';
+		}
+
+		global $bptcfedd_tatts,$table_id;
+		$bptcfedd_tatts = $atts;
+		$table_id = intval($atts['id']);
+
 		ob_start();
 
 		bptcfedd_get_template('shortcodes/bptcfedd-table.php', BPTCFEDD_PUBLIC_TEMPLATE_PATH);

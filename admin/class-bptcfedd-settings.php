@@ -20,14 +20,49 @@
  */
 class Bptcfedd_Admin_Settings {
 
+	/**
+	 * The array of border types.
+	 *
+	 * @since    1.0.0
+	 * @access   public
+	 * @var      array    $border_types    The array of border types.
+	 */
+	public $border_types;
 
+	/**
+	 * The array of text align types.
+	 *
+	 * @since    1.0.0
+	 * @access   public
+	 * @var      array    $text_align_types    The array of text align types.
+	 */
+	public $text_align_types;
+
+	/**
+	 * Initialize the class and set its properties.
+	 *
+	 * @since 	1.0.0
+	 */
+	public function __construct() {
+
+		$this->border_types = bptcfedd_get_def_borders();
+		$this->text_align_types = bptcfedd_get_def_text_align();
+
+	}
+
+	/**
+	 * Get all settings tabs.
+	 *
+	 * @since 	  1.0.0
+	 * @return    array    $tabs    The settings tabs.
+	 */
 	public function bptcfedd_get_tabs() {
 		
 		$tabs = array(
 			array(
-				'id' => 'lables',
-				'title' => esc_html__('Lables', 'bptcfedd'),
-				'fields' => $this->bptcfedd_get_lables_tab_fields()
+				'id' => 'labels',
+				'title' => esc_html__('Labels', 'bptcfedd'),
+				'fields' => $this->bptcfedd_get_labels_tab_fields()
 			),
 			array(
 				'id' => 'appearence',
@@ -39,15 +74,21 @@ class Bptcfedd_Admin_Settings {
 		return $tabs;
 	}
 
-	public function bptcfedd_get_lables_tab_fields(){
+	/**
+	 * Get labels tab settings fields.
+	 *
+	 * @since 	  1.0.0
+	 * @return    array    $fields    The fields of labels tab.
+	 */
+	public function bptcfedd_get_labels_tab_fields(){
 
-		$tab = 'lables';
+		$tab = 'labels';
 
 		$fields = array(
 			array(
-				'id' => 'table_headers',
+				'id' => 'table_header',
 				'type' => 'heading',
-				'title' => __( 'Table headers', 'bptcfedd'),
+				'title' => __( 'Table header', 'bptcfedd'),
 			)
 		);
 
@@ -63,26 +104,335 @@ class Bptcfedd_Admin_Settings {
 				'attributes' => array(
 					'placeholder="'.$column.'"',
 				),
-				'value' => $this->bptcfedd_get_value($cid, $tab),
+				'value' => bptcfedd_get_value($cid, $tab, $column),
 			);
 
 		}
 
+		$button_labels = array(
+			array(
+				'id' => 'button',
+				'type' => 'heading',
+				'title' => __( 'Button', 'bptcfedd'),
+			),
+			array(
+				'id' => 'all_to_cart',
+				'type' => 'input',
+				'input_type' => 'text',
+				'title' => __('All To Cart', 'bptcfedd'),
+				'attributes' => array(
+					'placeholder="'.__('All To Cart', 'bptcfedd').'"',
+				),
+				'value' => bptcfedd_get_value('all_to_cart', $tab, __('All To Cart', 'bptcfedd')),
+			),
+		);
+
+		$fields = array_merge($fields,$button_labels);
+
 		return $fields;
 
 	}
 
+	/**
+	 * Get appearence tab settings fields.
+	 *
+	 * @since 	  1.0.0
+	 * @return    array    $fields    The fields of appearence tab.
+	 */
 	public function bptcfedd_get_appearence_tab_fields(){
 
 		$tab = 'appearence';
 		
-		$fields = array(
+		$table_header_fields = array(
+			array(
+				'id' => 'table_header_style',
+				'type' => 'heading',
+				'title' => __( 'Table header', 'bptcfedd'),
+			),
+			array(
+				'id' => 'background_color',
+				'type' => 'input',
+				'input_type' => 'text',
+				'title' => __('Background Color', 'bptcfedd'),
+				'attributes' => array(
+					'class="bptcfedd-color-field"',
+					'data-default-color="#ffffff"',
+				),
+				'depth' => array('table_header'),
+				'value' => bptcfedd_get_value(
+					array(
+						'table_header',
+						'background_color'
+					), 
+					$tab,
+					'#ffffff'
+				),
+			),
+			array(
+				'id' => 'border_color',
+				'type' => 'input',
+				'input_type' => 'text',
+				'title' => __('Border Color', 'bptcfedd'),
+				'attributes' => array(
+					'class="bptcfedd-color-field"',
+					'data-default-color="#000000"',
+				),
+				'depth' => array('table_header'),
+				'value' => bptcfedd_get_value(
+					array(
+						'table_header',
+						'border_color'
+					), 
+					$tab,
+					'#000000'
+				),
+			),
+			array(
+				'id' => 'text_color',
+				'type' => 'input',
+				'input_type' => 'text',
+				'title' => __('Text Color', 'bptcfedd'),
+				'attributes' => array(
+					'class="bptcfedd-color-field"',
+					'data-default-color="#000000"',
+				),
+				'depth' => array('table_header'),
+				'value' => bptcfedd_get_value(
+					array(
+						'table_header',
+						'text_color'
+					), 
+					$tab,
+					'#000000'
+				),
+			),
+			array(
+				'id' => 'boder_width',
+				'type' => 'input',
+				'input_type' => 'text',
+				'title' => __('Border Width', 'bptcfedd'),
+				'attributes' => array(
+					'placeholder="1px 1px 1px 1px"',
+				),
+				'depth' => array('table_header'),
+				'value' => bptcfedd_get_value(
+					array(
+						'table_header',
+						'boder_width'
+					), 
+					$tab,
+					'1px 1px 1px 1px'
+				),
+			),
+			array(
+				'id' => 'boder_style',
+				'type' => 'select',
+				'input_type' => 'text',
+				'title' => __('Border Style', 'bptcfedd'),
+				'depth' => array('table_header'),
+				'options' => $this->border_types,
+				'attributes' => array(
+					'class="bptcfedd-select2"',
+				),
+				'value' => bptcfedd_get_value(
+					array(
+						'table_header',
+						'boder_style'
+					), 
+					$tab,
+					'solid'
+				),
+			),
+			array(
+				'id' => 'text_align',
+				'type' => 'select',
+				'input_type' => 'text',
+				'title' => __('Text Align', 'bptcfedd'),
+				'depth' => array('table_header'),
+				'options' => $this->text_align_types,
+				'attributes' => array(
+					'class="bptcfedd-select2"',
+				),
+				'value' => bptcfedd_get_value(
+					array(
+						'table_header',
+						'text_align'
+					), 
+					$tab,
+					'solid'
+				),
+			),
+			array(
+				'id' => 'padding',
+				'type' => 'input',
+				'input_type' => 'text',
+				'title' => __('Padding', 'bptcfedd'),
+				'attributes' => array(
+					'placeholder="0px 0px 0px 0px"',
+				),
+				'depth' => array('table_header'),
+				'value' => bptcfedd_get_value(
+					array(
+						'table_header',
+						'padding'
+					), 
+					$tab,
+					'0px 0px 0px 0px'
+				),
+			),
 		);
+
+		$table_body_fields = array(
+			array(
+				'id' => 'table_body_style',
+				'type' => 'heading',
+				'title' => __( 'Table Body', 'bptcfedd'),
+			),
+			array(
+				'id' => 'background_color',
+				'type' => 'input',
+				'input_type' => 'text',
+				'title' => __('Background Color', 'bptcfedd'),
+				'attributes' => array(
+					'class="bptcfedd-color-field"',
+					'data-default-color="#ffffff"',
+				),
+				'depth' => array('table_body'),
+				'value' => bptcfedd_get_value(
+					array(
+						'table_body',
+						'background_color'
+					), 
+					$tab,
+					'#ffffff'
+				),
+			),
+			array(
+				'id' => 'border_color',
+				'type' => 'input',
+				'input_type' => 'text',
+				'title' => __('Border Color', 'bptcfedd'),
+				'attributes' => array(
+					'class="bptcfedd-color-field"',
+					'data-default-color="#000000"',
+				),
+				'depth' => array('table_body'),
+				'value' => bptcfedd_get_value(
+					array(
+						'table_body',
+						'border_color'
+					), 
+					$tab,
+					'#000000'
+				),
+			),
+			array(
+				'id' => 'text_color',
+				'type' => 'input',
+				'input_type' => 'text',
+				'title' => __('Text Color', 'bptcfedd'),
+				'attributes' => array(
+					'class="bptcfedd-color-field"',
+					'data-default-color="#000000"',
+				),
+				'depth' => array('table_body'),
+				'value' => bptcfedd_get_value(
+					array(
+						'table_body',
+						'text_color'
+					), 
+					$tab,
+					'#000000'
+				),
+			),
+			array(
+				'id' => 'boder_width',
+				'type' => 'input',
+				'input_type' => 'text',
+				'title' => __('Border Width', 'bptcfedd'),
+				'attributes' => array(
+					'placeholder="1px 1px 1px 1px"',
+				),
+				'depth' => array('table_body'),
+				'value' => bptcfedd_get_value(
+					array(
+						'table_body',
+						'boder_width'
+					), 
+					$tab,
+					'1px 1px 1px 1px'
+				),
+			),
+			array(
+				'id' => 'boder_style',
+				'type' => 'select',
+				'input_type' => 'text',
+				'title' => __('Border Style', 'bptcfedd'),
+				'depth' => array('table_body'),
+				'options' => $this->border_types,
+				'attributes' => array(
+					'class="bptcfedd-select2"',
+				),
+				'value' => bptcfedd_get_value(
+					array(
+						'table_body',
+						'boder_style'
+					), 
+					$tab,
+					'solid'
+				),
+			),
+			array(
+				'id' => 'text_align',
+				'type' => 'select',
+				'input_type' => 'text',
+				'title' => __('Text Align', 'bptcfedd'),
+				'depth' => array('table_body'),
+				'options' => $this->text_align_types,
+				'attributes' => array(
+					'class="bptcfedd-select2"',
+				),
+				'value' => bptcfedd_get_value(
+					array(
+						'table_body',
+						'text_align'
+					), 
+					$tab,
+					'solid'
+				),
+			),
+			array(
+				'id' => 'padding',
+				'type' => 'input',
+				'input_type' => 'text',
+				'title' => __('Padding', 'bptcfedd'),
+				'attributes' => array(
+					'placeholder="0px 0px 0px 0px"',
+				),
+				'depth' => array('table_body'),
+				'value' => bptcfedd_get_value(
+					array(
+						'table_body',
+						'padding'
+					), 
+					$tab,
+					'0px 0px 0px 0px'
+				),
+			),
+		);
+
+		$fields = array_merge($table_header_fields, $table_body_fields);
 
 		return $fields;
 
 	}
 
+	/**
+	 * Get default field args.
+	 *
+	 * @since 	  1.0.0
+	 * @return    array    $default    The default field args.
+	 */
 	public function bptcfedd_default_field_args(){
 
 		$default = array(
@@ -92,14 +442,21 @@ class Bptcfedd_Admin_Settings {
 			'description' => '',
 			'attributes' => array(),
 			'value' => '',
+			'depth' => array(),
 		);
 
 		return $default;
 	}
 
+	/**
+	 * Save plugin settings.
+	 *
+	 * @since 	1.0.0
+	 */
 	public function bptcfedd_save_setting() {
 		
-		if ( ! isset( $_POST['bptcfedd_settings_nonce'] ) || ! wp_verify_nonce( $_POST['bptcfedd_settings_nonce'], 'bptcfedd_settings_non' ) ) {
+		if ( ! isset( $_POST['bptcfedd_settings_nonce'] ) || 
+			! wp_verify_nonce( $_POST['bptcfedd_settings_nonce'], 'bptcfedd_settings_non' ) ) {
 			return;
 		}
 
@@ -113,19 +470,42 @@ class Bptcfedd_Admin_Settings {
 
 	}
 
-	public function bptcfedd_get_value( $id, $tab = '' ){
+	/**
+	 * Save plugin settings.
+	 *
+	 * @since 	  1.0.0
+	 * @param     array    $tfield    The field args
+	 * @param     array    $tab       The tab args
+	 * @return    array    $field     The final field args.
+	 */
+	public function bptcfedd_preapre_field( $tfield, $tab ){
 
-		$settings = get_option('bptcfedd_settings');
+		$default_field_args = $this->bptcfedd_default_field_args();
+		$field = wp_parse_args($tfield, $default_field_args);
 
-		if ( empty( $settings ) ) {
-			return '';
+		$el_str = sprintf('[%s]', $field['id']);
+		$id_str = $tab['id'];
+		if ( ! empty( $field['depth'] ) ) {
+			$depth_str = '';
+			foreach ($field['depth'] as $dkey => $depth) {
+				$depth_str .= sprintf('[%s]', $depth);
+				$id_str .= sprintf('_%s', $depth);
+			}
+			$el_str = sprintf('%s%s', $depth_str, $el_str);
 		}
 
-		$value = isset( $settings[$tab][$id] ) ? $settings[$tab][$id] : '';
+		$field['id'] = sprintf('%s_%s', $id_str, $field['id']);
+		$field['name'] = sprintf('bptcfedd_settings[%s]%s', $tab['id'], $el_str);
 
-		return $value;
+		return $field;
+
 	}
 
+	/**
+	 * Add all hooks
+	 * 
+	 * @since 	1.0.0
+	 */
 	public function add_hooks(){
 
 		add_action( 'admin_init', array($this, 'bptcfedd_save_setting') );

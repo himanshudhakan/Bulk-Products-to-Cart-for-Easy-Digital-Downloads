@@ -14,14 +14,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-$table_settings = bptcfedd_get_table_settings();
+global $bptcfedd_tatts,$table_id;
+//$table_configs = bptcfedd_get_table_configs();
 
 ?>
-<table class="bptcfedd-download-table">
-	<thead>
-		<tr>
-			
-		</tr>
-	</thead>
-	<tbody></tbody>
-</table>
+<div class="bptcfedd-table-wrap" id="bptcfedd_table_wrap_<?php esc_attr_e($table_id); ?>">
+	<table class="bptcfedd-download-table">
+		<thead>
+			<tr>
+				
+			</tr>
+		</thead>
+		<tbody></tbody>
+	</table>
+</div>

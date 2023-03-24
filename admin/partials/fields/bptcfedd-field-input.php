@@ -17,6 +17,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $field;
 $description = $field['description'];
 $attributes = $field['attributes'];
+$option_value = $field['value'];
 
 ?>
 <tr valign="top">
@@ -24,7 +25,7 @@ $attributes = $field['attributes'];
 		<label for="<?php esc_attr_e( $field['id'] ); ?>"><?php esc_html_e( $field['title'] ); ?></label>
 	</th>
 	<td class="bptcfedd-field bptcfedd-field-number">
-		<input type="<?php esc_attr_e( $field['input_type'] ); ?>" name="<?php esc_attr_e( $field['name'] ); ?>" id="bptcfedd_<?php esc_attr_e( $field['id'] ); ?>"<?php echo implode( ' ', $attributes ); ?> />
+		<input type="<?php esc_attr_e( $field['input_type'] ); ?>" name="<?php esc_attr_e( $field['name'] ); ?>" id="bptcfedd_<?php esc_attr_e( $field['id'] ); ?>" value="<?php esc_attr_e( $option_value ); ?>"<?php echo implode( ' ', $attributes ); ?> />
 		<?php echo $description; ?>
 	</td>
 </tr>

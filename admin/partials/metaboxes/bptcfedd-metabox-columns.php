@@ -19,6 +19,9 @@ $bptcfedd_columns = get_post_meta($table_id, 'bptcfedd_columns', true);
 $checkbox = isset( $bptcfedd_columns['checkbox'] ) ? 
 	$bptcfedd_columns['checkbox'] : 
 	'';
+$id = isset( $bptcfedd_columns['id'] ) ? 
+	$bptcfedd_columns['id'] : 
+	'';
 $title = isset( $bptcfedd_columns['title'] ) ? 
 	$bptcfedd_columns['title'] : 
 	'';

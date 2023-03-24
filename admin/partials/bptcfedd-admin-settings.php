@@ -25,7 +25,6 @@ if ( ! current_user_can( 'manage_options' ) ) {
 }
 
 $tabs = $bptcfedd_settings->bptcfedd_get_tabs();
-$default_field_args = $bptcfedd_settings->bptcfedd_default_field_args();
 
 ?>
 <div class="wrap">
@@ -44,12 +43,13 @@ $default_field_args = $bptcfedd_settings->bptcfedd_default_field_args();
 							<tbody>
 								<?php foreach ($tab['fields'] as $t_fkey => $tfield) { ?>
 									<?php
+
 									global $field;
 									
-									$field = wp_parse_args($tfield, $default_field_args);
-									$field['name'] = sprintf('bptcfedd_settings[%s][%s]', $tab['id'], $tfield['id']);
-									$name = sprintf('fields/bptcfedd-field-%s.php', $field['type']);
-									bptcfedd_get_template($name, BPTCFEDD_ADMIN_TEMPLATE_PATH);
+									$field = $bptcfedd_settings->bptcfedd_preapre_field($tfield, $tab);
+									$file_name = sprintf('fields/bptcfedd-field-%s.php', $field['type']);
+									bptcfedd_get_template($file_name, BPTCFEDD_ADMIN_TEMPLATE_PATH);
+
 									?>
 								<?php } ?>
 							</tbody>

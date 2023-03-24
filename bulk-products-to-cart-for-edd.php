@@ -73,7 +73,7 @@ define( 'BPTCFEDD_PUBLIC_DIR_URL', BPTCFEDD_PLUGIN_DIR_URL . 'public/' );
 /**
  * Public template dir path.
  */
-define( 'BPTCFEDD_PUBLIC_TEMPLATE_PATH', BPTCFEDD_PLUGIN_DIR_PATH . 'partials/' );
+define( 'BPTCFEDD_PUBLIC_TEMPLATE_PATH', BPTCFEDD_PUBLIC_DIR_PATH . 'partials/' );
 
 /**
  * Public dir path.
