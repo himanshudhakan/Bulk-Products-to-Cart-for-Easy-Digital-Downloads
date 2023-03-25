@@ -140,8 +140,8 @@ $all_to_cart = isset( $bptcfedd_conditions['all_to_cart'] ) ?
 		<label for="bptcfedd_select2_order"><?php esc_html_e('Order', 'bptcfedd'); ?></label>
 		<select class="bptcfedd-select2" id="bptcfedd_select2_order" name="bptcfedd_conditions[order]">
 			<?php if ( ! empty( $all_orders ) ) { ?>
-				<?php foreach ($all_orders as $ord => $order) { ?>
-					<option value="<?php esc_attr_e($ord); ?>"<?php selected( $order, $ord); ?>><?php echo $order; ?></option>
+				<?php foreach ($all_orders as $ord => $order_title) { ?>
+					<option value="<?php esc_attr_e($ord); ?>"<?php selected( $order, $ord); ?>><?php echo $order_title; ?></option>
 				<?php } ?>
 			<?php } ?>
 		</select>
@@ -151,7 +151,7 @@ $all_to_cart = isset( $bptcfedd_conditions['all_to_cart'] ) ?
 		<select class="bptcfedd-select2" id="bptcfedd_select2_orderby" name="bptcfedd_conditions[orderby]">
 			<?php if ( ! empty( $all_order_bys ) ) { ?>
 				<?php foreach ($all_order_bys as $ord_by => $order_by) { ?>
-					<option value="<?php esc_attr_e($ord_by); ?>"<?php selected( $order_by, $ord_by); ?>><?php echo $order_by; ?></option>
+					<option value="<?php esc_attr_e($ord_by); ?>"<?php selected( $orderby, $ord_by); ?>><?php echo $order_by; ?></option>
 				<?php } ?>
 			<?php } ?>
 		</select>

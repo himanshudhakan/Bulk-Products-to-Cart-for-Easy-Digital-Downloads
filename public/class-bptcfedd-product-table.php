@@ -48,6 +48,24 @@ class Bptcfedd_Product_Table {
 	public $columns;
 
 	/**
+	 * The table query.
+	 *
+	 * @since    1.0.0
+	 * @access   public
+	 * @var      array    $query    The table query.
+	 */
+	public $query;
+
+	/**
+	 * The table download_id.
+	 *
+	 * @since    1.0.0
+	 * @access   public
+	 * @var      array    $download_id    The table download_id.
+	 */
+	public $download_id;
+
+	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
@@ -58,6 +76,31 @@ class Bptcfedd_Product_Table {
 
 		$this->table_id = $table_id;
 		$this->configs = bptcfedd_get_table_configs($table_id);
+
+	}
+
+	/**
+	 * Get query object
+	 * 
+	 * @since    1.0.0
+	 */
+	public function bptcfedd_get_query(){
+
+		$query = isset( $this->query ) ? $this->query : false;
+		return $query;
+
+	}
+
+	/**
+	 * Get current page
+	 * 
+	 * @since    1.0.0
+	 */
+	public function bptcfedd_get_paged(){
+
+		$page_key = sprintf('%d_paged', $this->table_id);
+		$paged = ! empty( $_GET[$page_key] ) ? sanitize_text_field( $_GET[$page_key] ) : 1;
+		return $paged;
 
 	}
 
@@ -94,7 +137,13 @@ class Bptcfedd_Product_Table {
 		<?php if ( $query->have_posts() ) { ?>
 			<?php while ( $query->have_posts() ) { ?>
 				<tr>
-					<?php $query->the_post(); ?>
+					<?php
+					global $post;
+					$query->the_post(); 
+					$this->download_id = get_the_ID();
+					$download_post = get_post($this->download_id);
+					$post = $download_post;
+					?>
 					<?php if ( ! empty( $this->columns ) ) { ?>
 						<?php foreach ($this->columns as $ckey => $column) { ?>
 							<?php $method = sprintf('bptcfedd_display_col_%s', $ckey); ?>
@@ -107,34 +156,249 @@ class Bptcfedd_Product_Table {
 
 	}
 
-	public function bptcfedd_display_col_id(){
+	/**
+	 * Display checkbox for product
+	 * 
+	 * @since    1.0.0
+	 */
+	public function bptcfedd_display_col_checkbox(){
 
-		echo get_the_title();
+		?>
+		<div class="bptcfedd-checkbox-wrap">
+			<input type="checkbox" name="bptcfedd_checkbox[]" value="<?php esc_attr_e( $this->table_id ); ?>">
+		</div>
+		<?php
 
 	}
 
+	/**
+	 * Display id of product
+	 * 
+	 * @since    1.0.0
+	 */
+	public function bptcfedd_display_col_id(){
+
+		?>
+		<div class="bptcfedd-id-wrap">
+			<p><?php the_ID(); ?></p>
+		</div>
+		<?php
+
+	}
+
+	/**
+	 * Display title of product
+	 * 
+	 * @since    1.0.0
+	 */
+	public function bptcfedd_display_col_title(){
+
+		?>
+		<div class="bptcfedd-title-wrap">
+			<?php edd_get_template_part( 'shortcode', 'content-title' ); ?>
+		</div>
+		<?php
+
+	}
+
+	/**
+	 * Display image of product
+	 * 
+	 * @since    1.0.0
+	 */
+	public function bptcfedd_display_col_img(){
+
+		?>
+		<div class="bptcfedd-img-wrap">
+			<?php edd_get_template_part( 'shortcode', 'content-image' ); ?>
+		</div>
+		<?php
+
+	}
+
+	/**
+	 * Display price of product
+	 * 
+	 * @since    1.0.0
+	 */
+	public function bptcfedd_display_col_price(){
+
+		?>
+		<div class="bptcfedd-price-wrap">
+			<?php edd_get_template_part( 'shortcode', 'content-price' ); ?>
+		</div>
+		<?php
+
+	}
+
+	/**
+	 * Display excerpt of product
+	 * 
+	 * @since    1.0.0
+	 */
+	public function bptcfedd_display_col_excerpt(){
+
+		?>
+		<div class="bptcfedd-excerpt-wrap">
+			<?php edd_get_template_part( 'shortcode', 'content-excerpt' ); ?>
+		</div>
+		<?php
+
+	}
+
+	/**
+	 * Display add to cart button for product
+	 * 
+	 * @since    1.0.0
+	 */
+	public function bptcfedd_display_col_addtocart(){
+
+		?>
+		<div class="bptcfedd-addtocart-wrap">
+			<?php edd_get_template_part( 'shortcode', 'content-cart-button' ); ?>
+		</div>
+		<?php
+
+	}
+
+	/**
+	 * Display categories of product
+	 * 
+	 * @since    1.0.0
+	 */
+	public function bptcfedd_display_col_cats(){
+
+		$args = array(
+			'fields' => 'names',
+		);
+		$get_cats = wp_get_post_terms($this->download_id, 'download_category', $args);
+
+		?>
+		<?php if ( !empty( $get_cats ) ) { ?>
+			<div class="bptcfedd-cats-wrap">
+				<p><?php echo implode(', ', $get_cats); ?></p>
+			</div>
+		<?php } ?>
+		<?php
+
+	}
+
+	/**
+	 * Display tags of product
+	 * 
+	 * @since    1.0.0
+	 */
+	public function bptcfedd_display_col_tags(){
+
+		$args = array(
+			'fields' => 'names',
+		);
+		$get_tags = wp_get_post_terms($this->download_id, 'download_tag', $args);
+
+		?>
+		<?php if ( !empty( $get_tags ) ) { ?>
+			<div class="bptcfedd-tags-wrap">
+				<p><?php echo implode(', ', $get_tags); ?></p>
+			</div>
+		<?php } ?>
+		<?php
+
+	}
+
+	/**
+	 * Display date of product
+	 * 
+	 * @since    1.0.0
+	 */
+	public function bptcfedd_display_col_date(){
+
+		$date_format = get_option('date_format');
+		?>
+		<div class="bptcfedd-date-wrap">
+			<?php echo get_the_date($date_format); ?>
+		</div>
+		<?php
+
+	}
+
+	/**
+	 * Display pagination for product table
+	 * 
+	 * @since    1.0.0
+	 */
+	public function bptcfedd_display_pagination(){
+
+		$query = $this->query;
+		$paged = $this->bptcfedd_get_paged();
+		$args = array(
+		    'format' => sprintf('?%d_paged=%%#%%', $this->table_id),
+		    'type' => 'plain',
+		    'mid_size'  => 3,
+		    'prev_next' => true,
+		    'current' => max( 1, $paged ),
+		    'total' => $query->max_num_pages,
+		);
+
+		?>
+		<div class="bptcfedd-pagination bptcfedd-pagination-<?php esc_attr_e($this->table_id); ?>">
+			<?php echo paginate_links( $args ); ?>
+		</div>
+		<?php
+
+	}
+
+	/**
+	 * Run the query for product table
+	 * 
+	 * @since     1.0.0
+	 * @return    WP_Query   $final_query     The object of WP_Query class
+	 */
 	public function bptcfedd_run_query(){
 
 		$conditions = $this->configs['conditions'];
 		$tax_args = $this->bptcfedd_prepare_query_tax_args();
-		$tax_query = new WP_Query($tax_args);
-
 		$args = $this->bptcfedd_prepare_query_args();
-		if ( ! empty( $tax_query->posts ) ) {
-			$args['post__in'] = array_merge($args['post__in'], $tax_query->posts);
+		$run_second_query = false;
+
+		if ( ! empty( $tax_args ) ) {
+
+			if ( empty( $args['post__in'] ) && empty( $conditions['exclude_downloads'] ) ) {
+				$paged = $this->bptcfedd_get_paged();
+				$tax_args['posts_per_page'] = intval( $conditions['per_page'] );
+				$tax_args['paged'] = $paged;
+			}
+
+			$tax_query = new WP_Query($tax_args);
+
+			if ( ! empty( $args['post__in'] ) && ! empty( $tax_query->posts ) ) {
+				$args['post__in'] = array_merge($args['post__in'], $tax_query->posts);
+			}
 		}
-		$final_query = new WP_Query($args);
+		
+		if ( ! empty( $conditions['exclude_downloads'] ) ) {
+			$posts = array();
 
-		// if ( ! empty( $conditions['exclude_downloads'] ) ) {
-		// 	$posts = array();
-		// 	foreach ($final_query->posts as $key => $id) {
-		// 		if ( ! in_array($id, $conditions['exclude_downloads']) ) {
-		// 			$posts[] = $id;
-		// 		}
-		// 	}
-		// 	$final_query->posts = $posts;
-		// }
+			if ( ! empty( $args['post__in'] ) ) {
+				foreach ($args['post__in'] as $key => $id) {
+					if ( ! in_array($id, $conditions['exclude_downloads']) ) {
+						$posts[] = $id;
+					}
+				}
+				$args['post__in'] = $posts;
+			}else{
+				$args['post__not_in'] = $conditions['exclude_downloads'];
+			}
+			
+		}
 
+		if ( ! empty( $args['post__in'] ) || ! empty( $conditions['exclude_downloads'] ) ) {
+			$final_query = new WP_Query($args);
+		}else{
+			$final_query = $tax_query;
+		}
+		
+		$this->query = $final_query;
+		
 		return $final_query;
 	}
 
@@ -147,9 +411,12 @@ class Bptcfedd_Product_Table {
 	public function bptcfedd_prepare_query_args(){
 
 		$conditions = $this->configs['conditions'];
+		$paged = $this->bptcfedd_get_paged();
 		$args = array(
 			'post_type' => 'download',
+			'post_status' => 'publish',
 			'fields' => 'ids',
+			'paged' => $paged,
 		);		
 		$tax_queryies = array();
 
@@ -213,7 +480,8 @@ class Bptcfedd_Product_Table {
 			$args = array(
 				'post_type' => 'download',
 				'tax_query' => $tax_queryies,
-				'posts_per_page' => -1,
+				'post_status' => 'publish',
+				'fields' => 'ids',
 			);
 		}
 
