@@ -1,0 +1,13 @@
+.bptcfedd-alladdtocart-btn{
+	position: relative;
+}
+.bptcfedd-loading span.bptcfedd-alladdtocart{
+	opacity: 0;
+}
+.bptcfedd-loading span.edd-loading{
+	opacity: 1;
+}
+.bptcfedd-alladdtocart-wrap .edd-cart-added-alert{
+	display: inline;
+	position: unset;
+}

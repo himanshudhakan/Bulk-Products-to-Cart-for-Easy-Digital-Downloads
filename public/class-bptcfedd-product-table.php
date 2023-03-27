@@ -165,7 +165,7 @@ class Bptcfedd_Product_Table {
 
 		?>
 		<div class="bptcfedd-checkbox-wrap">
-			<input type="checkbox" name="bptcfedd_checkbox[]" value="<?php esc_attr_e( $this->table_id ); ?>">
+			<input type="checkbox" class="bptcfedd-table-checkbox" name="bptcfedd_checkbox[]" value="<?php esc_attr_e( $this->download_id ); ?>">
 		</div>
 		<?php
 

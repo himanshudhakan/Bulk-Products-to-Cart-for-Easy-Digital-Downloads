@@ -98,6 +98,7 @@ function bptcfedd_get_def_columns(){
 		'cats' 			=> esc_html__('Category', 'bptcfedd'),
 		'tags' 			=> esc_html__('Tags', 'bptcfedd'),
 		'date' 			=> esc_html__('Date', 'bptcfedd'),
+		'alltocart'     => esc_html__('All to cart', 'bptcfedd'),
 	);
 
 	return $columns;

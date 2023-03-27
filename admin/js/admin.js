@@ -60,8 +60,6 @@
 	 	$('#bptcfedd-tabs-nav li').removeClass('active');
 	  	$(this).addClass('active');
 	  	$('.bptcfedd-tab-content').hide();
-	  
-	  	//bptcfedd_init_select2();
 
 	  	var activeTab = $(this).find('a').attr('href');
 	  	$(activeTab).show();

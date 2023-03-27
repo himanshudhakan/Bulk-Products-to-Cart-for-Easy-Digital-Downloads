@@ -65,12 +65,16 @@ class Bptcfedd_Shortcodes {
 		), $atts, 'bptcfedd_table' );
 
 		if ( empty( $atts['id'] ) ) {
-			return '';
+			return;
 		}
 
 		global $bptcfedd_tatts,$table_id;
 		$bptcfedd_tatts = $atts;
 		$table_id = intval($atts['id']);
+		$get_table = get_post($table_id);
+		if ( empty( $get_table ) ) {
+			return;
+		}
 
 		ob_start();
 

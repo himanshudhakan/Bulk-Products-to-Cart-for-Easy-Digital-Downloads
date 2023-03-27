@@ -52,4 +52,73 @@ class Bptcfedd_Public {
 
 	}
 
+	/**
+	 * Add scripts for front.
+	 *
+	 * @since 	1.0.0
+	 */
+	public function bptcfedd_enqueue_scripts(){
+
+		wp_enqueue_script('bptcfedd-public-script', BPTCFEDD_PUBLIC_DIR_URL . 'js/bptcfedd-public.js', array('jquery'), false, true );	
+
+		$addtocart_success_html = '<span class="edd-cart-added-alert" style="/* display: none; */"><svg class="edd-icon edd-icon-check" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><path d="M26.11 8.844c0 .39-.157.78-.44 1.062L12.234 23.344c-.28.28-.672.438-1.062.438s-.78-.156-1.06-.438l-7.782-7.78c-.28-.282-.438-.673-.438-1.063s.156-.78.438-1.06l2.125-2.126c.28-.28.672-.438 1.062-.438s.78.156 1.062.438l4.594 4.61L21.42 5.656c.282-.28.673-.438 1.063-.438s.78.155 1.062.437l2.125 2.125c.28.28.438.672.438 1.062z"></path></svg>Added to cart</span>';
+
+		$bptcfedd_public_obj = array( 
+			'ajaxurl' => admin_url( 'admin-ajax.php' ),
+			'addtocart_success_html' => $addtocart_success_html,
+		);
+
+
+		wp_localize_script( 'bptcfedd-public-script', 'bptcfedd_public_obj', $bptcfedd_public_obj);
+
+	}
+
+	/**
+	 * Add styles for front.
+	 *
+	 * @since 	1.0.0
+	 */
+	public function bptcfedd_enqueue_styles(){
+
+		wp_enqueue_style('bptcfedd-public-style', BPTCFEDD_PUBLIC_DIR_URL . 'css/bptcfedd-public.css' );
+
+	}
+
+	/**
+	 * Add to cart products in bulk.
+	 *
+	 * @since 	1.0.0
+	 */
+	public function bptcfedd_alladdtocart_callback(){
+
+		$response = array();
+		$response['success'] = false;
+		$data = bptcfedd_sanitize_text_field($_POST);
+
+		if ( isset( $data['bptcfedd_checkbox'] ) && ! empty( $data['bptcfedd_checkbox'] ) ) {
+			
+			$ids = $data['bptcfedd_checkbox'];
+			foreach ($ids as $key => $id) {
+				edd_add_to_cart( $id );
+			}
+			$response['success'] = true;
+
+		}
+
+		wp_send_json($response);
+	}
+
+	/**
+	 * Add all hooks
+	 * 
+	 * @since 	1.0.0
+	 */
+	public function add_hooks(){
+
+		add_action( 'wp_enqueue_scripts', array($this, 'bptcfedd_enqueue_scripts') );
+		add_action( 'wp_enqueue_scripts', array($this, 'bptcfedd_enqueue_styles') );
+		add_action( 'wp_ajax_bptcfedd_alladdtocart', array($this, 'bptcfedd_alladdtocart_callback') );
+
+	}
+	
 }
