@@ -16,9 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $bptcfedd_tatts,$table_id;
 
-$all_def_columns = bptcfedd_get_def_columns();
-$saved_lable = bptcfedd_get_value('all_to_cart', 'labels');
-$button_lable = ! empty( $saved_lable ) ? $saved_lable : $all_def_columns['alltocart'];
+$button_lable = bptcfedd_get_value('all_to_cart', 'labels');
 
 ?>
 <div class="bptcfedd-alladdtocart-wrap">

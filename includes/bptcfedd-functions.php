@@ -98,7 +98,6 @@ function bptcfedd_get_def_columns(){
 		'cats' 			=> esc_html__('Category', 'bptcfedd'),
 		'tags' 			=> esc_html__('Tags', 'bptcfedd'),
 		'date' 			=> esc_html__('Date', 'bptcfedd'),
-		'alltocart'     => esc_html__('All to cart', 'bptcfedd'),
 	);
 
 	return $columns;
@@ -221,13 +220,30 @@ function bptcfedd_get_default_values(){
 	$def_column_lables = bptcfedd_get_def_columns();
 
 	$default_values = array(
-		'lables' => $def_column_lables,
+		'labels' => $def_column_lables,
 		'appearence' => array(
 			'table_header' => array(
 				'background_color' => '#ffffff',
+				'border_color' => '#000000',
+				'text_color' => '#000000',
+				'boder_width' => '1px 1px 1px 1px',
+				'boder_style' => 'solid',
+				'text_align' => 'left',
+				'padding'	=> '0px 0px 0px 0px',
+			),
+			'table_body' => array(
+				'background_color' => '#ffffff',
+				'border_color' => '#000000',
+				'text_color' => '#000000',
+				'boder_width' => '1px 1px 1px 1px',
+				'boder_style' => 'solid',
+				'text_align' => 'left',
+				'padding'	=> '0px 0px 0px 0px',
 			),
 		),
 	);
+
+	$default_values['labels']['all_to_cart'] = esc_html__('All to cart', 'bptcfedd');
 
 	return $default_values;
 }
@@ -238,10 +254,9 @@ function bptcfedd_get_default_values(){
  * @since 	  1.0.0
  * @param     string     $id         The id of setting.
  * @param     string     $tab        The id of tab.
- * @param     string     $default    The default value.
  * @return    mixed      $value      The setting value.
  */
-function bptcfedd_get_value( $id = '', $tab = '', $default = '' ){
+function bptcfedd_get_value( $id = '', $tab = '' ){
 
 	$settings = get_option('bptcfedd_settings');
 	$default_values = bptcfedd_get_default_values();
@@ -251,25 +266,35 @@ function bptcfedd_get_value( $id = '', $tab = '', $default = '' ){
 	}
 
 	if ( empty( $settings ) ) {
-		return $default;
+		return null;
 	}
 
 	if ( is_array( $id ) ) {
 		$depth = $settings[$tab];
+		$default_depth = $default_values[$tab];
 		foreach ($id as $idkey => $index) {
 			if ( isset( $depth[$index] ) ) {
 				$depth = $depth[$index];
-			}else{
-				return $default;
 			}
+
+			if ( isset( $default_depth[$index] ) ) {
+				$default_depth = $default_depth[$index];
+			}
+
 		}
-		$value = ! empty( $depth ) ? $depth : $default;
+		$value = ! empty( $depth ) ? $depth : $default_depth;
 	}else if ( ! empty( $id ) ) {
-		$value = isset( $settings[$tab][$id] ) ? $settings[$tab][$id] : $default;
+		$value = isset( $settings[$tab][$id] ) ? $settings[$tab][$id] : null;
+		if ( empty( $value ) && isset( $default_values[$tab][$id] ) && ! empty( $default_values[$tab][$id] ) ) {
+			$value = $default_values[$tab][$id];
+		}
 	}else if ( ! empty( $tab ) ) {
-		$value = isset( $settings[$tab] ) ? $settings[$tab] : $default;
+		$value = isset( $settings[$tab] ) ? $settings[$tab] : null;
+		if ( empty( $value ) && isset( $default_values[$tab] ) && ! empty( $default_values[$tab] ) ) {
+			$value = $default_values[$tab];
+		}
 	}else{
-		$value = $default;
+		$value = null;
 	}
 
 	return $value;

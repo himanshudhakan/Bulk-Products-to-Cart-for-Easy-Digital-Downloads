@@ -52,7 +52,7 @@ class Bptcfedd_Product_Table {
 	 *
 	 * @since    1.0.0
 	 * @access   public
-	 * @var      array    $query    The table query.
+	 * @var      WP_Query    $query    The table query.
 	 */
 	public $query;
 
@@ -61,9 +61,18 @@ class Bptcfedd_Product_Table {
 	 *
 	 * @since    1.0.0
 	 * @access   public
-	 * @var      array    $download_id    The table download_id.
+	 * @var      int    $download_id    The table download_id.
 	 */
 	public $download_id;
+
+	/**
+	 * The transient key.
+	 *
+	 * @since    1.0.0
+	 * @access   public
+	 * @var      string    $transient_key    The transient key.
+	 */
+	public $transient_key;
 
 	/**
 	 * Initialize the class and set its properties.
@@ -76,6 +85,7 @@ class Bptcfedd_Product_Table {
 
 		$this->table_id = $table_id;
 		$this->configs = bptcfedd_get_table_configs($table_id);
+		$this->transient_key = sprintf('bptcfedd_query_%d', $table_id);
 
 	}
 
@@ -328,6 +338,12 @@ class Bptcfedd_Product_Table {
 	 */
 	public function bptcfedd_display_pagination(){
 
+		$is_enabled = isset( $this->configs['conditions']['pagination'] ) ? true : false;
+
+		if ( ! $is_enabled ) {
+			return;
+		}
+
 		$query = $this->query;
 		$paged = $this->bptcfedd_get_paged();
 		$args = array(
@@ -354,6 +370,13 @@ class Bptcfedd_Product_Table {
 	 * @return    WP_Query   $final_query     The object of WP_Query class
 	 */
 	public function bptcfedd_run_query(){
+
+		$get_query = get_transient( $this->transient_key );
+
+		if ( ! empty( $get_query ) ) {
+			$this->query = $get_query;
+			return $get_query;
+		}
 
 		$conditions = $this->configs['conditions'];
 		$tax_args = $this->bptcfedd_prepare_query_tax_args();
@@ -398,6 +421,7 @@ class Bptcfedd_Product_Table {
 		}
 		
 		$this->query = $final_query;
+		set_transient( $this->transient_key, $final_query );
 		
 		return $final_query;
 	}

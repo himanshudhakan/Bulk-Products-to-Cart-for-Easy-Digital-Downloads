@@ -54,9 +54,6 @@ $per_page = isset( $bptcfedd_conditions['per_page'] ) ?
 $pagination = isset( $bptcfedd_conditions['pagination'] ) ? 
 	$bptcfedd_conditions['pagination'] : 
 	'';
-$ajax_pagination = isset( $bptcfedd_conditions['ajax_pagination'] ) ? 
-	$bptcfedd_conditions['ajax_pagination'] : 
-	'';
 $all_to_cart = isset( $bptcfedd_conditions['all_to_cart'] ) ? 
 	$bptcfedd_conditions['all_to_cart'] : 
 	'';
@@ -163,10 +160,6 @@ $all_to_cart = isset( $bptcfedd_conditions['all_to_cart'] ) ?
 	<div class="bptcfedd-field">
 		<label for="bptcfedd_pagination"><?php esc_html_e('Pagination', 'bptcfedd'); ?></label>
 		<input class="bptcfedd-simple-checkbox" type="checkbox" name="bptcfedd_conditions[pagination]" id="bptcfedd_pagination" value="1" <?php checked( $pagination, '1' ); ?> />
-	</div>
-	<div class="bptcfedd-field">
-		<label for="bptcfedd_ajax_pagination"><?php esc_html_e('Ajax Pagination', 'bptcfedd'); ?></label>
-		<input class="bptcfedd-simple-checkbox" type="checkbox" name="bptcfedd_conditions[ajax_pagination]" id="bptcfedd_ajax_pagination" value="1" <?php checked( $ajax_pagination, '1' ); ?> />
 	</div>
 	<div class="bptcfedd-field">
 		<label for="bptcfedd_all_to_cart"><?php esc_html_e('All To Cart Button', 'bptcfedd'); ?></label>

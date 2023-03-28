@@ -238,29 +238,32 @@ class Bptcfedd_Admin {
 	 * Save table post meta data
 	 *
 	 * @since 	1.0.0
-	 * @param   int        $download_id    The post id.
+	 * @param   int        $table_id    The post id.
 	 * @param   WP_Post    $download       The post object.
 	 */
-	public function bptcfedd_save_metadata( $download_id, $download ){
+	public function bptcfedd_save_metadata( $table_id, $download ){
 
 		if ( ! isset( $_POST['bptcfedd_table_meta_nonce'] ) || 
 			! wp_verify_nonce( $_POST['bptcfedd_table_meta_nonce'], 'bptcfedd_table_meta' ) ) {
 			return;
 		}
 
-		if ( ! current_user_can( 'edit_post', $download_id ) ) {
+		if ( ! current_user_can( 'edit_post', $table_id ) ) {
 		   return;
 		}
 
 		if ( isset( $_POST['bptcfedd_columns'] ) ) {
 			$sani_bptcfedd_columns = bptcfedd_sanitize_text_field($_POST['bptcfedd_columns']);
-			update_post_meta($download_id, 'bptcfedd_columns', $sani_bptcfedd_columns);
+			update_post_meta($table_id, 'bptcfedd_columns', $sani_bptcfedd_columns);
 		}
 
 		if ( isset( $_POST['bptcfedd_conditions'] ) ) {
 			$sani_bptcfedd_conditions = bptcfedd_sanitize_text_field($_POST['bptcfedd_conditions']);
-			update_post_meta($download_id, 'bptcfedd_conditions', $sani_bptcfedd_conditions);
+			update_post_meta($table_id, 'bptcfedd_conditions', $sani_bptcfedd_conditions);
 		}
+
+		$transient_key = sprintf('bptcfedd_query_%d', $table_id);
+		delete_transient($transient_key);
 
 	}
 

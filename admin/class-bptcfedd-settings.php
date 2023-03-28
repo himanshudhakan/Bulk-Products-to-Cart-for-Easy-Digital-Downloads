@@ -165,7 +165,6 @@ class Bptcfedd_Admin_Settings {
 						'background_color'
 					), 
 					$tab,
-					'#ffffff'
 				),
 			),
 			array(
@@ -184,7 +183,6 @@ class Bptcfedd_Admin_Settings {
 						'border_color'
 					), 
 					$tab,
-					'#000000'
 				),
 			),
 			array(
@@ -203,7 +201,6 @@ class Bptcfedd_Admin_Settings {
 						'text_color'
 					), 
 					$tab,
-					'#000000'
 				),
 			),
 			array(
@@ -221,7 +218,6 @@ class Bptcfedd_Admin_Settings {
 						'boder_width'
 					), 
 					$tab,
-					'1px 1px 1px 1px'
 				),
 			),
 			array(
@@ -240,7 +236,6 @@ class Bptcfedd_Admin_Settings {
 						'boder_style'
 					), 
 					$tab,
-					'solid'
 				),
 			),
 			array(
@@ -259,7 +254,6 @@ class Bptcfedd_Admin_Settings {
 						'text_align'
 					), 
 					$tab,
-					'solid'
 				),
 			),
 			array(
@@ -277,7 +271,6 @@ class Bptcfedd_Admin_Settings {
 						'padding'
 					), 
 					$tab,
-					'0px 0px 0px 0px'
 				),
 			),
 		);
@@ -304,7 +297,6 @@ class Bptcfedd_Admin_Settings {
 						'background_color'
 					), 
 					$tab,
-					'#ffffff'
 				),
 			),
 			array(
@@ -323,7 +315,6 @@ class Bptcfedd_Admin_Settings {
 						'border_color'
 					), 
 					$tab,
-					'#000000'
 				),
 			),
 			array(
@@ -342,7 +333,6 @@ class Bptcfedd_Admin_Settings {
 						'text_color'
 					), 
 					$tab,
-					'#000000'
 				),
 			),
 			array(
@@ -360,7 +350,6 @@ class Bptcfedd_Admin_Settings {
 						'boder_width'
 					), 
 					$tab,
-					'1px 1px 1px 1px'
 				),
 			),
 			array(
@@ -379,7 +368,6 @@ class Bptcfedd_Admin_Settings {
 						'boder_style'
 					), 
 					$tab,
-					'solid'
 				),
 			),
 			array(
@@ -398,7 +386,6 @@ class Bptcfedd_Admin_Settings {
 						'text_align'
 					), 
 					$tab,
-					'solid'
 				),
 			),
 			array(
@@ -415,8 +402,7 @@ class Bptcfedd_Admin_Settings {
 						'table_body',
 						'padding'
 					), 
-					$tab,
-					'0px 0px 0px 0px'
+					$tab
 				),
 			),
 		);
