@@ -121,7 +121,7 @@ class Bulk_Products_To_Cart_For_Edd {
 		require_once BPTCFEDD_ADMIN_DIR_PATH . 'class-bptcfedd-settings.php';
 
 		/**
-		 * The class responsible for defining all shortcodes of the plugin.
+		 * The class responsible for defining all actions for display table.
 		 */
 		require_once BPTCFEDD_PUBLIC_DIR_PATH . 'class-bptcfedd-product-table.php';
 
@@ -186,6 +186,44 @@ class Bulk_Products_To_Cart_For_Edd {
 		$this->load_dependencies();
 		$this->define_hooks();
 
+	}
+
+	/**
+	 * Deactivate this plugin if EDD is not activate.
+	 *
+	 * @since    1.0.0
+	 */
+	public function bptcfedd_deactivate() {
+
+		if ( !function_exists('deactivate_plugins') ) {
+			require_once(ABSPATH . 'wp-admin/includes/plugin.php');
+		}
+
+		add_action('admin_notices', array($this, 'bptcfedd_edd_check_notice'));
+		if( isset( $_GET['activate'] ) ){
+			unset( $_GET['activate'] );
+			$_GET['deactivate'] = true;
+		}
+		deactivate_plugins( BPTCFEDD_FILE, true );
+
+	}
+
+	/**
+	 * Display notice if EDD is not activate.
+	 *
+	 * @since    1.0.0
+	 */
+	public function bptcfedd_edd_check_notice() {
+		
+		$plugin_name = sprintf('<strong>%s</strong>', esc_html('Bulk Products to Cart for Easy Digital Downloads') );
+		$message = esc_html('plugin requires Easy Digital Downloads in order to work. So please ensure that Easy Digital Downloads is installed and activated.');
+		$notice = sprintf('%s %s', $plugin_name, $message);
+
+	    ?>
+	    <div class="error notice is-dismissible">
+	        <p><?php echo $notice; ?></p>
+	    </div>
+	    <?php
 	}
 
 	/**

@@ -64,10 +64,8 @@ function bptcfedd_search_downloads( $by = 'title', $value = '' ){
 		$args = array(
 			'post_type' 		=> 'download',
 			's' 				=> $value,
-			'fields'			=> 'id=>post_title',
 			'posts_per_page'	=> -1,
 		);
-		$downloads = new WP_Query($args);
 
 		if( !empty( $downloads->posts ) ){
 			$response = wp_list_pluck( $downloads->posts, 'post_title', 'ID' );

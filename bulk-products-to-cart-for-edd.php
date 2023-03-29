@@ -33,6 +33,11 @@ define( 'BPTCFEDD_VERSION', '1.0.0' );
 /**
  * Plugin dir path.
  */
+define( 'BPTCFEDD_FILE', __FILE__ );
+
+/**
+ * Plugin dir path.
+ */
 define( 'BPTCFEDD_PLUGIN_DIR_PATH', plugin_dir_path( __FILE__ ) );
 
 /**
@@ -85,28 +90,6 @@ define( 'BPTCFEDD_LIBS_DIR_PATH', BPTCFEDD_PLUGIN_DIR_PATH . 'libs/' );
  */
 define( 'BPTCFEDD_LIBS_DIR_URL', BPTCFEDD_PLUGIN_DIR_URL . 'libs/' );
 
-
-
-
-/**
- * The code that runs during plugin activation.
- */
-function activate_bptcfedd() {
-	require_once BPTCFEDD_INC_DIR_PATH . 'class-bptcfedd-activator.php';
-	Bptcfedd_Activator::activate();
-}
-
-/**
- * The code that runs during plugin deactivation.
- */
-function deactivate_bptcfedd() {
-	require_once BPTCFEDD_INC_DIR_PATH . 'class-bptcfedd-deactivator.php';
-	Bptcfedd_Deactivator::deactivate();
-}
-
-register_activation_hook( __FILE__, 'activate_bptcfedd' );
-register_deactivation_hook( __FILE__, 'deactivate_bptcfedd' );
-
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
@@ -118,10 +101,15 @@ require BPTCFEDD_INC_DIR_PATH . 'class-bulk-products-to-cart-for-edd.php';
  *
  * @since    1.0.0
  */
-function run_bptcfedd() {
+function bptcfedd_run(){
 
-	$plugin = new Bulk_Products_To_Cart_For_Edd();
-	$plugin->run();
+	$bptcfedd = new Bulk_Products_To_Cart_For_Edd();
+
+	if ( class_exists('Easy_Digital_Downloads') ){
+		$bptcfedd->run();
+	}else{
+		$bptcfedd->bptcfedd_deactivate();
+	}
 
 }
-run_bptcfedd();
+add_action('plugins_loaded', 'bptcfedd_run');

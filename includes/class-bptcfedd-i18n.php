@@ -42,6 +42,11 @@ class Bptcfedd_i18n {
 
 	}
 
+	/**
+	 * Add all hooks.
+	 *
+	 * @since    1.0.0
+	 */
 	public function add_hooks(){
 
 		add_action( 'plugins_loaded',  array($this, 'load_plugin_textdomain') );

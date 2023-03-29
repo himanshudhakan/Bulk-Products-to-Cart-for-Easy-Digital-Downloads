@@ -20,6 +20,11 @@
  */
 class Bptcfedd_Init {
 
+	/**
+	 * Register custom post types
+	 * 
+	 * @since 	1.0.0
+	 */
 	public function bptcfedd_register_post_type(){
 
 		$labels = array(
@@ -60,7 +65,11 @@ class Bptcfedd_Init {
 
 	}
 
-
+	/**
+	 * Add all hooks
+	 * 
+	 * @since 	1.0.0
+	 */
 	public function add_hooks(){
 
 		add_action('init', array($this, 'bptcfedd_register_post_type'));
