@@ -121,6 +121,11 @@ class Bulk_Products_To_Cart_For_Edd {
 		require_once BPTCFEDD_ADMIN_DIR_PATH . 'class-bptcfedd-settings.php';
 
 		/**
+		 * The class responsible for defining all shortcodes of the plugin.
+		 */
+		require_once BPTCFEDD_PUBLIC_DIR_PATH . 'class-bptcfedd-product-table.php';
+
+		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the plugin.
 		 */
@@ -130,11 +135,6 @@ class Bulk_Products_To_Cart_For_Edd {
 		 * The class responsible for defining all shortcodes of the plugin.
 		 */
 		require_once BPTCFEDD_PUBLIC_DIR_PATH . 'class-bptcfedd-shortcodes.php';
-
-		/**
-		 * The class responsible for defining all shortcodes of the plugin.
-		 */
-		require_once BPTCFEDD_PUBLIC_DIR_PATH . 'class-bptcfedd-product-table.php';
 
 		$plugin_i18n = new Bptcfedd_i18n();
 		$plugin_init = new Bptcfedd_Init();

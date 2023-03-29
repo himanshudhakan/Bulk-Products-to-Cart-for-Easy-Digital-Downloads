@@ -29,6 +29,7 @@ $tabs = $bptcfedd_settings->bptcfedd_get_tabs();
 ?>
 <div class="wrap">
 	<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
+	<?php bptcfedd_print_admin_notices(); ?>
 	<form method="post">
 		<div class="bptcfedd-tabs">
 			<ul id="bptcfedd-tabs-nav">

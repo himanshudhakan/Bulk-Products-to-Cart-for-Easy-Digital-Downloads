@@ -156,7 +156,7 @@ class Bptcfedd_Admin_Settings {
 				'title' => __('Background Color', 'bptcfedd'),
 				'attributes' => array(
 					'class="bptcfedd-color-field"',
-					'data-default-color="#ffffff"',
+					'data-default-color="#428bca"',
 				),
 				'depth' => array('table_header'),
 				'value' => bptcfedd_get_value(
@@ -174,7 +174,7 @@ class Bptcfedd_Admin_Settings {
 				'title' => __('Border Color', 'bptcfedd'),
 				'attributes' => array(
 					'class="bptcfedd-color-field"',
-					'data-default-color="#000000"',
+					'data-default-color="#eee"',
 				),
 				'depth' => array('table_header'),
 				'value' => bptcfedd_get_value(
@@ -186,13 +186,30 @@ class Bptcfedd_Admin_Settings {
 				),
 			),
 			array(
+				'id' => 'font_size',
+				'type' => 'input',
+				'input_type' => 'text',
+				'title' => __('Font Size', 'bptcfedd'),
+				'attributes' => array(
+					'placeholder="1px"',
+				),
+				'depth' => array('table_header'),
+				'value' => bptcfedd_get_value(
+					array(
+						'table_header',
+						'font_size'
+					), 
+					$tab,
+				),
+			),
+			array(
 				'id' => 'text_color',
 				'type' => 'input',
 				'input_type' => 'text',
 				'title' => __('Text Color', 'bptcfedd'),
 				'attributes' => array(
 					'class="bptcfedd-color-field"',
-					'data-default-color="#000000"',
+					'data-default-color="#ffffff"',
 				),
 				'depth' => array('table_header'),
 				'value' => bptcfedd_get_value(
@@ -209,7 +226,7 @@ class Bptcfedd_Admin_Settings {
 				'input_type' => 'text',
 				'title' => __('Border Width', 'bptcfedd'),
 				'attributes' => array(
-					'placeholder="1px 1px 1px 1px"',
+					'placeholder="1px"',
 				),
 				'depth' => array('table_header'),
 				'value' => bptcfedd_get_value(
@@ -306,13 +323,30 @@ class Bptcfedd_Admin_Settings {
 				'title' => __('Border Color', 'bptcfedd'),
 				'attributes' => array(
 					'class="bptcfedd-color-field"',
-					'data-default-color="#000000"',
+					'data-default-color="#eee"',
 				),
 				'depth' => array('table_body'),
 				'value' => bptcfedd_get_value(
 					array(
 						'table_body',
 						'border_color'
+					), 
+					$tab,
+				),
+			),
+			array(
+				'id' => 'font_size',
+				'type' => 'input',
+				'input_type' => 'text',
+				'title' => __('Font Size', 'bptcfedd'),
+				'attributes' => array(
+					'placeholder="1px"',
+				),
+				'depth' => array('table_body'),
+				'value' => bptcfedd_get_value(
+					array(
+						'table_body',
+						'font_size'
 					), 
 					$tab,
 				),
@@ -341,7 +375,7 @@ class Bptcfedd_Admin_Settings {
 				'input_type' => 'text',
 				'title' => __('Border Width', 'bptcfedd'),
 				'attributes' => array(
-					'placeholder="1px 1px 1px 1px"',
+					'placeholder="1px"',
 				),
 				'depth' => array('table_body'),
 				'value' => bptcfedd_get_value(
@@ -407,7 +441,174 @@ class Bptcfedd_Admin_Settings {
 			),
 		);
 
-		$fields = array_merge($table_header_fields, $table_body_fields);
+		$pagination_fields = array(
+			array(
+				'id' => 'pagination_style',
+				'type' => 'heading',
+				'title' => __( 'Pagination', 'bptcfedd'),
+			),
+			array(
+				'id' => 'background_color',
+				'type' => 'input',
+				'input_type' => 'text',
+				'title' => __('Background Color', 'bptcfedd'),
+				'attributes' => array(
+					'class="bptcfedd-color-field"',
+					'data-default-color="#ffffff"',
+				),
+				'depth' => array('pagination'),
+				'value' => bptcfedd_get_value(
+					array(
+						'pagination',
+						'background_color'
+					), 
+					$tab,
+				),
+			),
+			array(
+				'id' => 'border_color',
+				'type' => 'input',
+				'input_type' => 'text',
+				'title' => __('Border Color', 'bptcfedd'),
+				'attributes' => array(
+					'class="bptcfedd-color-field"',
+					'data-default-color="#eee"',
+				),
+				'depth' => array('pagination'),
+				'value' => bptcfedd_get_value(
+					array(
+						'pagination',
+						'border_color'
+					), 
+					$tab,
+				),
+			),
+			array(
+				'id' => 'font_size',
+				'type' => 'input',
+				'input_type' => 'text',
+				'title' => __('Font Size', 'bptcfedd'),
+				'attributes' => array(
+					'placeholder="1px"',
+				),
+				'depth' => array('pagination'),
+				'value' => bptcfedd_get_value(
+					array(
+						'pagination',
+						'font_size'
+					), 
+					$tab,
+				),
+			),
+			array(
+				'id' => 'text_color',
+				'type' => 'input',
+				'input_type' => 'text',
+				'title' => __('Text Color', 'bptcfedd'),
+				'attributes' => array(
+					'class="bptcfedd-color-field"',
+					'data-default-color="#428bca"',
+				),
+				'depth' => array('pagination'),
+				'value' => bptcfedd_get_value(
+					array(
+						'pagination',
+						'text_color'
+					), 
+					$tab,
+				),
+			),
+			array(
+				'id' => 'boder_width',
+				'type' => 'input',
+				'input_type' => 'text',
+				'title' => __('Border Width', 'bptcfedd'),
+				'attributes' => array(
+					'placeholder="1px"',
+				),
+				'depth' => array('pagination'),
+				'value' => bptcfedd_get_value(
+					array(
+						'pagination',
+						'boder_width'
+					), 
+					$tab,
+				),
+			),
+			array(
+				'id' => 'boder_style',
+				'type' => 'select',
+				'input_type' => 'text',
+				'title' => __('Border Style', 'bptcfedd'),
+				'depth' => array('pagination'),
+				'options' => $this->border_types,
+				'attributes' => array(
+					'class="bptcfedd-select2"',
+				),
+				'value' => bptcfedd_get_value(
+					array(
+						'pagination',
+						'boder_style'
+					), 
+					$tab,
+				),
+			),
+			array(
+				'id' => 'padding',
+				'type' => 'input',
+				'input_type' => 'text',
+				'title' => __('Padding', 'bptcfedd'),
+				'attributes' => array(
+					'placeholder="0px 0px 0px 0px"',
+				),
+				'depth' => array('pagination'),
+				'value' => bptcfedd_get_value(
+					array(
+						'pagination',
+						'padding'
+					), 
+					$tab
+				),
+			),
+			array(
+				'id' => 'active_background_color',
+				'type' => 'input',
+				'input_type' => 'text',
+				'title' => __('Active Background Color', 'bptcfedd'),
+				'attributes' => array(
+					'class="bptcfedd-color-field"',
+					'data-default-color="#428bca"',
+				),
+				'depth' => array('pagination'),
+				'value' => bptcfedd_get_value(
+					array(
+						'pagination',
+						'active_background_color'
+					), 
+					$tab,
+				),
+			),
+			array(
+				'id' => 'active_text_color',
+				'type' => 'input',
+				'input_type' => 'text',
+				'title' => __('Active Text Color', 'bptcfedd'),
+				'attributes' => array(
+					'class="bptcfedd-color-field"',
+					'data-default-color="#ffffff"',
+				),
+				'depth' => array('pagination'),
+				'value' => bptcfedd_get_value(
+					array(
+						'pagination',
+						'active_text_color'
+					), 
+					$tab,
+				),
+			),
+		);
+
+		$fields = array_merge($table_header_fields, $table_body_fields, $pagination_fields);
 
 		return $fields;
 
@@ -450,9 +651,23 @@ class Bptcfedd_Admin_Settings {
 			return;
 		}
 		
+		$old_settings = get_option('bptcfedd_settings');
 		$settings = isset( $_POST['bptcfedd_settings'] ) ? $_POST['bptcfedd_settings'] : array();
 		$sani_bptcfedd_settings = bptcfedd_sanitize_text_field($settings);
-		update_option('bptcfedd_settings', $sani_bptcfedd_settings);
+		$updated = update_option('bptcfedd_settings', $sani_bptcfedd_settings);
+
+		if ( $updated ||
+			( $old_settings == $sani_bptcfedd_settings && ! $updated ) ) {
+			bptcfedd_add_admin_notice(
+				__('Settings has been saved successfuly.', 'bptcfedd'),
+				'success'
+			);
+		}else{
+			bptcfedd_add_admin_notice(
+				__('Settings has not been saved successfuly.', 'bptcfedd'),
+				'error'
+			);
+		}
 
 	}
 

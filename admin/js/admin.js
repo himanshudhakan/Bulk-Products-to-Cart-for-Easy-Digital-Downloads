@@ -4,7 +4,8 @@
 	const ajaxUrl = bptcfedd_admin_obj.ajaxurl,
 		coman_select2_obj = {
 			width: 'resolve',
-		};
+		},
+		{ __, _x, _n, _nx } = wp.i18n;
 	var select2_obj = {};
 
 	select2_obj.bptcfedd_select2_downloads = {
@@ -66,4 +67,25 @@
 	  	return false;
 	});
 
+	$('.bptcfedd-shortcode-copy-btn').click(function(){
+
+		var main = $(this).closest('.bptcfedd-shortcode-wrap'),
+			input = main.find('.bptcfedd-shortcode'),
+			btn = $(this);
+
+		input.select();
+		document.execCommand("copy");
+		$(this).text(__('Copied', 'bptcfedd'));
+
+		setTimeout(function(){
+			btn.text(__('Copy', 'bptcfedd'));
+		}, 3000);
+
+	});
+
+	$('.bptcfedd-shortcode').click(function(){
+		$(this).select();
+	});
+
 })( jQuery );
+

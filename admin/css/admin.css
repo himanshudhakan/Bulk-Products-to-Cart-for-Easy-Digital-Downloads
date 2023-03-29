@@ -12,6 +12,12 @@
 input[type="checkbox"].bptcfedd-simple-checkbox{
 	margin: 0;
 }
+.bptcfedd-shortcode-wrap{
+  display: inline-block;
+}
+.bptcfedd-shortcode-copy-wrap{
+  float: right;
+}
 
 /* tab css start */
 
@@ -19,6 +25,7 @@ input[type="checkbox"].bptcfedd-simple-checkbox{
   width: 70%;
   background-color: #dcdcde;
   border-radius: 5px 5px 5px 5px;
+  margin-top: 10px;
 }
 ul#bptcfedd-tabs-nav {
   list-style: none;

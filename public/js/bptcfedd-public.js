@@ -21,12 +21,28 @@
 
 		var main = $(this).closest('.bptcfedd-table-wrap'),
 			btn = $(this),
-			checkboxes = main.find('.bptcfedd-download-table .bptcfedd-table-checkbox:checked').serialize(),
-			seria_data = checkboxes + '&action=bptcfedd_alladdtocart';
+			action = '&action=bptcfedd_alladdtocart';
+
+		if ( $('.bptcfedd-alladdtocart-selectall').length ) {
+			var checkboxes = main.find('.bptcfedd-download-table .bptcfedd-table-checkbox:checked').serialize();
+			var	data = checkboxes + action;
+		}else{
+			var downloads = [];
+			main.find('.bptcfedd-download-table tbody tr').each(function(key, val){
+
+				var id = $(this).data('download-id');
+				downloads.push(id);
+
+			});
+			var data = {
+				action: 'bptcfedd_alladdtocart',
+				bptcfedd_checkbox: downloads
+			}
+		}
 		
 		$.ajax( {
 			type: 'POST',
-			data: seria_data,
+			data: data,
 			url: ajaxUrl,
 			beforeSend: function(){
 				btn.addClass('bptcfedd-loading');

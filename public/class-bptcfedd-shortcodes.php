@@ -68,13 +68,14 @@ class Bptcfedd_Shortcodes {
 			return;
 		}
 
-		global $bptcfedd_tatts,$table_id;
+		global $bptcfedd_tatts,$table_id,$bptcfedd_table;
 		$bptcfedd_tatts = $atts;
 		$table_id = intval($atts['id']);
 		$get_table = get_post($table_id);
 		if ( empty( $get_table ) ) {
 			return;
 		}
+		$bptcfedd_table = new Bptcfedd_Product_Table($table_id);
 
 		ob_start();
 

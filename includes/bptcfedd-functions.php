@@ -223,22 +223,35 @@ function bptcfedd_get_default_values(){
 		'labels' => $def_column_lables,
 		'appearence' => array(
 			'table_header' => array(
-				'background_color' => '#ffffff',
-				'border_color' => '#000000',
-				'text_color' => '#000000',
-				'boder_width' => '1px 1px 1px 1px',
+				'background_color' => '#428bca',
+				'border_color' => '#eee',
+				'text_color' => '#ffffff',
+				'boder_width' => '1px',
 				'boder_style' => 'solid',
 				'text_align' => 'left',
-				'padding'	=> '0px 0px 0px 0px',
+				'padding'	=> '5px 14px',
+				'font_size' => '18px',
 			),
 			'table_body' => array(
 				'background_color' => '#ffffff',
-				'border_color' => '#000000',
+				'border_color' => '#eee',
 				'text_color' => '#000000',
-				'boder_width' => '1px 1px 1px 1px',
+				'boder_width' => '1px',
 				'boder_style' => 'solid',
 				'text_align' => 'left',
-				'padding'	=> '0px 0px 0px 0px',
+				'padding'	=> '5px 14px',
+				'font_size' => '16px',
+			),
+			'pagination' => array(
+				'background_color' => '#ffffff',
+				'border_color' => '#eee',
+				'text_color' => '#428bca',
+				'boder_width' => '1px',
+				'boder_style' => 'solid',
+				'padding'	=> '5px 10px',
+				'font_size' => '16px',
+				'active_background_color' => '#428bca',
+				'active_text_color' => '#ffffff',
 			),
 		),
 	);
@@ -265,12 +278,8 @@ function bptcfedd_get_value( $id = '', $tab = '' ){
 		return $default_values;
 	}
 
-	if ( empty( $settings ) ) {
-		return null;
-	}
-
 	if ( is_array( $id ) ) {
-		$depth = $settings[$tab];
+		$depth = isset( $settings[$tab] ) ? $settings[$tab] : array();
 		$default_depth = $default_values[$tab];
 		foreach ($id as $idkey => $index) {
 			if ( isset( $depth[$index] ) ) {
@@ -347,4 +356,51 @@ function bptcfedd_get_table_columns( $table_id, $tb_columns = array() ){
 	}
 
 	return $columns;
+}
+
+/**
+ * Add admin notices
+ * 
+ * @since 	  1.0.0
+ * @param     string     $message    The message
+ * @param     string     $type       The type of notice
+ */
+function bptcfedd_add_admin_notice( $message, $type ){
+
+	if ( empty( $message ) ) {
+		return;
+	}
+
+	$notices = isset( $_SESSION['bptcfedd_notices'] ) ? $_SESSION['bptcfedd_notices'] : array();
+
+	$notices[] = array(
+		'message' => $message,
+		'type' => $type,
+	);
+
+	$_SESSION['bptcfedd_notices'] = $notices;
+
+}
+
+/**
+ * Print admin notices
+ * 
+ * @since 	  1.0.0
+ */
+function bptcfedd_print_admin_notices(){
+
+	$notices = isset( $_SESSION['bptcfedd_notices'] ) ? $_SESSION['bptcfedd_notices'] : array();
+
+	if ( ! empty( $notices ) ) {
+		foreach ($notices as $key => $notice) {
+			
+			$class = sprintf('notice notice-%s is-dismissible', $notice['type']);
+			$message = $notice['message'];
+
+			printf( '<div class="%1$s"><p>%2$s</p></div>', esc_attr( $class ), esc_html( $message ) );
+
+		}
+		unset($_SESSION['bptcfedd_notices']);
+	}
+
 }

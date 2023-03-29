@@ -114,7 +114,7 @@ class Bptcfedd_Admin {
 
 		$post_type = get_post_type();
 		wp_register_script('bptcfedd-select-script', BPTCFEDD_LIBS_DIR_URL . 'js/select2.min.js', array('jquery'), false, true );
-		wp_register_script('bptcfedd-admin-script', BPTCFEDD_ADMIN_DIR_URL . 'js/admin.js', array('jquery','wp-color-picker'), false, true );
+		wp_register_script('bptcfedd-admin-script', BPTCFEDD_ADMIN_DIR_URL . 'js/admin.js', array('jquery','wp-color-picker', 'wp-i18n'), false, true );
 
 		if( in_array($hook_suffix, $this->allowed_screen_id) || in_array($post_type, $this->allowed_post_types) ){
 
@@ -239,7 +239,7 @@ class Bptcfedd_Admin {
 	 *
 	 * @since 	1.0.0
 	 * @param   int        $table_id    The post id.
-	 * @param   WP_Post    $download       The post object.
+	 * @param   WP_Post    $download    The post object.
 	 */
 	public function bptcfedd_save_metadata( $table_id, $download ){
 
@@ -262,8 +262,71 @@ class Bptcfedd_Admin {
 			update_post_meta($table_id, 'bptcfedd_conditions', $sani_bptcfedd_conditions);
 		}
 
-		$transient_key = sprintf('bptcfedd_query_%d', $table_id);
-		delete_transient($transient_key);
+
+	}
+
+	/**
+	 * Add custom column to admin list table
+	 *
+	 * @since 	1.0.0
+	 * @param   array    $columns    The array of columns.
+	 */
+	public function bptcfedd_custom_posttype_columns( $columns ){
+
+		$date = $columns['date'];
+		unset( $columns['date'] );
+	    $columns['shortcode'] = __( 'Shortcode', 'bptcfedd' );
+	    $columns['date'] = $date;
+
+	    return $columns;
+
+	}
+
+	/**
+	 * Add custom column content
+	 *
+	 * @since 	1.0.0
+	 * @param   string    $column     The column name.
+	 * @param   int       $post_id    The id of current post.
+	 */
+	public function bptcfedd_custom_posttype( $column, $post_id ){
+
+		 switch ( $column ) {
+
+	        case 'shortcode' :
+	        	$inp_val = sprintf('[bptcfedd_table id="%d"]', $post_id);
+	            ?>
+	             <div class="bptcfedd-shortcode-wrap">
+		         	<input type="text" class="bptcfedd-shortcode" value="<?php esc_attr_e($inp_val); ?>">
+					<div class="bptcfedd-shortcode-copy-wrap">
+						<span class="bptcfedd-shortcode-copy-text buttons">
+							<button type="button" class="button bptcfedd-shortcode-copy-btn"><?php esc_html_e('Copy', 'bptcfedd'); ?></button>
+						</span>
+					</div>
+		        </div>
+	            <?php
+	            break;
+
+	    }
+
+	}
+
+	/**
+	 * Add custom action links on plugi listing
+	 * 
+	 * @since  1.0
+	 * @param  array    $actions    The array of actions
+	 * @return array    $actions    The array of actions
+	 */
+	public function bptcfedd_action_links( $actions ){
+
+		$settings_url = add_query_arg( array( 
+			'post_type' => 'bptcfedd_tables', 
+			'page' => 'bptcfedd_settings', 
+		), admin_url( 'edit.php' ) );
+		$actions['settings'] = '<a href="' . esc_url( $settings_url ) . '">' . esc_html__( 'Settings', 'bptcfedd' ) . '</a>';
+
+		return $actions;
 
 	}
 
@@ -280,6 +343,9 @@ class Bptcfedd_Admin {
 		add_action( 'add_meta_boxes', array( $this, 'bptcfedd_add_meta_boxes' ) );
 		add_action( 'save_post_bptcfedd_tables', array( $this, 'bptcfedd_save_metadata' ), 10, 2 );
 		add_action( 'wp_ajax_bptcfedd_search_downloads', array($this, 'bptcfedd_search_downloads_callback') );
+		add_filter( 'manage_bptcfedd_tables_posts_columns', array($this, 'bptcfedd_custom_posttype_columns') );
+		add_action( 'manage_bptcfedd_tables_posts_custom_column' , array($this, 'bptcfedd_custom_posttype'), 10, 2 );
+		add_filter( 'plugin_action_links_bulk-products-to-cart-for-edd/bulk-products-to-cart-for-edd.php', array($this, 'bptcfedd_action_links'), 10 );
 
 	}
 

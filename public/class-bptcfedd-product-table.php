@@ -66,15 +66,6 @@ class Bptcfedd_Product_Table {
 	public $download_id;
 
 	/**
-	 * The transient key.
-	 *
-	 * @since    1.0.0
-	 * @access   public
-	 * @var      string    $transient_key    The transient key.
-	 */
-	public $transient_key;
-
-	/**
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
@@ -85,7 +76,6 @@ class Bptcfedd_Product_Table {
 
 		$this->table_id = $table_id;
 		$this->configs = bptcfedd_get_table_configs($table_id);
-		$this->transient_key = sprintf('bptcfedd_query_%d', $table_id);
 
 	}
 
@@ -146,7 +136,7 @@ class Bptcfedd_Product_Table {
 		?>
 		<?php if ( $query->have_posts() ) { ?>
 			<?php while ( $query->have_posts() ) { ?>
-				<tr>
+				<tr data-download-id=<?php esc_attr_e(get_the_ID()); ?>>
 					<?php
 					global $post;
 					$query->the_post(); 
@@ -371,33 +361,28 @@ class Bptcfedd_Product_Table {
 	 */
 	public function bptcfedd_run_query(){
 
-		$get_query = get_transient( $this->transient_key );
-
-		if ( ! empty( $get_query ) ) {
-			$this->query = $get_query;
-			return $get_query;
-		}
-
 		$conditions = $this->configs['conditions'];
 		$tax_args = $this->bptcfedd_prepare_query_tax_args();
 		$args = $this->bptcfedd_prepare_query_args();
-		$run_second_query = false;
+		$only_tax_query = empty( $args['post__in'] ) && empty( $conditions['exclude_downloads'] );
 
 		if ( ! empty( $tax_args ) ) {
 
-			if ( empty( $args['post__in'] ) && empty( $conditions['exclude_downloads'] ) ) {
+			if ( $only_tax_query ) {
 				$paged = $this->bptcfedd_get_paged();
 				$tax_args['posts_per_page'] = intval( $conditions['per_page'] );
 				$tax_args['paged'] = $paged;
 			}
-
+			
 			$tax_query = new WP_Query($tax_args);
 
 			if ( ! empty( $args['post__in'] ) && ! empty( $tax_query->posts ) ) {
 				$args['post__in'] = array_merge($args['post__in'], $tax_query->posts);
+			}else if( ! $only_tax_query ){
+				$args['post__in'] = $tax_query->posts;
 			}
 		}
-		
+
 		if ( ! empty( $conditions['exclude_downloads'] ) ) {
 			$posts = array();
 
@@ -414,14 +399,13 @@ class Bptcfedd_Product_Table {
 			
 		}
 
-		if ( ! empty( $args['post__in'] ) || ! empty( $conditions['exclude_downloads'] ) ) {
+		if ( ! empty( $args['post__in'] ) || ! empty( $conditions['exclude_downloads'] ) || empty( $tax_args )  ) {
 			$final_query = new WP_Query($args);
 		}else{
 			$final_query = $tax_query;
 		}
 		
 		$this->query = $final_query;
-		set_transient( $this->transient_key, $final_query );
 		
 		return $final_query;
 	}
@@ -505,6 +489,7 @@ class Bptcfedd_Product_Table {
 				'post_type' => 'download',
 				'tax_query' => $tax_queryies,
 				'post_status' => 'publish',
+				'posts_per_page' => -1,
 				'fields' => 'ids',
 			);
 		}
