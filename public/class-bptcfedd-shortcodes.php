@@ -72,7 +72,9 @@ class Bptcfedd_Shortcodes {
 		$bptcfedd_tatts = $atts;
 		$table_id = intval($atts['id']);
 		$get_table = get_post($table_id);
-		if ( empty( $get_table ) ) {
+		if ( empty( $get_table ) || 
+				$get_table->post_status != 'publish' ||
+				 	$get_table->post_type != 'bptcfedd_tables' ) {
 			return;
 		}
 		$bptcfedd_table = new Bptcfedd_Product_Table($table_id);

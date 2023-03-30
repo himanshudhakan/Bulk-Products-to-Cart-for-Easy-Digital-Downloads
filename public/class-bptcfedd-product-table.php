@@ -99,7 +99,7 @@ class Bptcfedd_Product_Table {
 	public function bptcfedd_get_paged(){
 
 		$page_key = sprintf('%d_paged', $this->table_id);
-		$paged = ! empty( $_GET[$page_key] ) ? sanitize_text_field( $_GET[$page_key] ) : 1;
+		$paged = ! empty( $_GET[$page_key] ) ? bptcfedd_sanitize_text_field( $_GET[$page_key] ) : 1;
 		return $paged;
 
 	}
@@ -136,14 +136,14 @@ class Bptcfedd_Product_Table {
 		?>
 		<?php if ( $query->have_posts() ) { ?>
 			<?php while ( $query->have_posts() ) { ?>
+				<?php
+				global $post;
+				$query->the_post(); 
+				$this->download_id = get_the_ID();
+				$download_post = get_post($this->download_id);
+				$post = $download_post;
+				?>
 				<tr data-download-id=<?php esc_attr_e(get_the_ID()); ?>>
-					<?php
-					global $post;
-					$query->the_post(); 
-					$this->download_id = get_the_ID();
-					$download_post = get_post($this->download_id);
-					$post = $download_post;
-					?>
 					<?php if ( ! empty( $this->columns ) ) { ?>
 						<?php foreach ($this->columns as $ckey => $column) { ?>
 							<?php $method = sprintf('bptcfedd_display_col_%s', $ckey); ?>

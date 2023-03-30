@@ -23,7 +23,7 @@
 			btn = $(this),
 			action = '&action=bptcfedd_alladdtocart';
 
-		if ( $('.bptcfedd-alladdtocart-selectall').length ) {
+		if ( main.find('.bptcfedd-alladdtocart-selectall').length ) {
 			var checkboxes = main.find('.bptcfedd-download-table .bptcfedd-table-checkbox:checked').serialize();
 			var	data = checkboxes + action;
 		}else{
