@@ -15,17 +15,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 global $field;
-$description = $field['description'];
-$attributes = $field['attributes'];
+$description  = $field['description'];
+$attributes   = $field['attributes'];
 $option_value = $field['value'];
 
 ?>
 <tr valign="top">
 	<th scope="row" class="bptcfedd-field-heading">
-		<label for="<?php esc_attr_e( $field['id'] ); ?>"><?php esc_html_e( $field['title'] ); ?></label>
+		<label for="<?php echo esc_attr( $field['id'] ); ?>"><?php esc_html_e( $field['title'] ); ?></label>
 	</th>
 	<td class="bptcfedd-field bptcfedd-field-number">
-		<input type="<?php esc_attr_e( $field['input_type'] ); ?>" name="<?php esc_attr_e( $field['name'] ); ?>" id="bptcfedd_<?php esc_attr_e( $field['id'] ); ?>" value="<?php esc_attr_e( $option_value ); ?>"<?php echo implode( ' ', $attributes ); ?> />
-		<?php echo $description; ?>
+		<input type="<?php echo esc_attr( $field['input_type'] ); ?>" name="<?php echo esc_attr( $field['name'] ); ?>" id="bptcfedd_<?php echo esc_attr( $field['id'] ); ?>" value="<?php echo esc_attr( $option_value ); ?>"<?php echo implode( ' ', $attributes ); ?> />
+		<?php echo esc_html( $description ); ?>
 	</td>
 </tr>

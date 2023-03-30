@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Define the internationalization functionality
  *
@@ -24,7 +23,7 @@
  * @subpackage Bulk_Products_To_Cart_For_Edd/includes
  * @author     Himanshu Dhakan <himanshudhakan9@gmail.com>
  */
-class Bptcfedd_i18n {
+class Bptcfedd_I18n {
 
 
 	/**
@@ -47,9 +46,9 @@ class Bptcfedd_i18n {
 	 *
 	 * @since    1.0.0
 	 */
-	public function add_hooks(){
+	public function add_hooks() {
 
-		add_action( 'plugins_loaded',  array($this, 'load_plugin_textdomain') );
+		add_action( 'plugins_loaded', array( $this, 'load_plugin_textdomain' ) );
 
 	}
 

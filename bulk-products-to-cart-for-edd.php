@@ -1,11 +1,10 @@
 <?php
-
 /**
  * The plugin bootstrap file
  *
- * @link              https://profiles.wordpress.org/himanshud
- * @since             1.0.0
- * @package           Bulk_Products_To_Cart_For_Edd
+ * @link    https://profiles.wordpress.org/himanshud
+ * @since   1.0.0
+ * @package Bulk_Products_To_Cart_For_Edd
  *
  * @wordpress-plugin
  * Plugin Name:       Bulk Products to Cart for Easy Digital Downloads
@@ -99,17 +98,16 @@ require BPTCFEDD_INC_DIR_PATH . 'class-bulk-products-to-cart-for-edd.php';
 /**
  * Begins execution of the plugin.
  *
- * @since    1.0.0
+ * @since 1.0.0
  */
-function bptcfedd_run(){
-
+function bptcfedd_run() {
 	$bptcfedd = new Bulk_Products_To_Cart_For_Edd();
 
-	if ( class_exists('Easy_Digital_Downloads') ){
+	if ( class_exists( 'Easy_Digital_Downloads' ) ) {
 		$bptcfedd->run();
-	}else{
+	} else {
 		$bptcfedd->bptcfedd_deactivate();
 	}
 
 }
-add_action('plugins_loaded', 'bptcfedd_run');
+add_action( 'plugins_loaded', 'bptcfedd_run' );

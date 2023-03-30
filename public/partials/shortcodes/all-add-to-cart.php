@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Provide a all add to cart button for the plugin
  *
@@ -16,7 +15,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 global $bptcfedd_tatts,$table_id,$bptcfedd_table;
 
-$button_lable = bptcfedd_get_value('all_to_cart', 'labels');
+$button_lable = bptcfedd_get_value( 'all_to_cart', 'labels' );
 if ( ! isset( $bptcfedd_table->configs['conditions']['all_to_cart'] ) ) {
 	return;
 }
@@ -27,7 +26,7 @@ if ( ! isset( $bptcfedd_table->configs['conditions']['all_to_cart'] ) ) {
 		<input type="checkbox" name="bptcfedd_alladdtocart" class="bptcfedd-alladdtocart-selectall" />
 	<?php } ?>
 	<button class="bptcfedd-alladdtocart-btn button blue edd-submit">
-		<span class="bptcfedd-alladdtocart"><?php echo esc_html($button_lable); ?></span>
-		<span class="edd-loading" aria-label="<?php esc_html_e('Loading', 'bptcfedd'); ?>"></span>
+		<span class="bptcfedd-alladdtocart"><?php echo esc_html( $button_lable ); ?></span>
+		<span class="edd-loading" aria-label="<?php esc_html_e( 'Loading', 'bptcfedd' ); ?>"></span>
 	</button>
 </div>
