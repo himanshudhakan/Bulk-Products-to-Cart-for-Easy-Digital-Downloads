@@ -19,6 +19,6 @@ global $field;
 ?>
 <tr valign="top">
 	<th scope="row" class="bptcfedd-field-heading">
-		<h4 class="bptcfedd-sub-heading" id="bptcfedd_<?php esc_attr_e( $field['id'] ); ?>"><?php esc_html_e( $field['title'] ); ?></h4>
+		<h4 class="bptcfedd-sub-heading" id="bptcfedd_<?php echo esc_attr( $field['id'] ); ?>"><?php esc_html_e( $field['title'] ); ?></h4>
 	</th>
 </tr>

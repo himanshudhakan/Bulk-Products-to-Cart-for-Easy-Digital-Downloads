@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Provide a table view for the plugin
  *
@@ -14,26 +13,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-global $bptcfedd_tatts,$table_id;
-$table = new Bptcfedd_Product_Table($table_id);
+global $bptcfedd_tatts,$table_id,$bptcfedd_table;
 
 ?>
-<div class="bptcfedd-table-wrap" id="bptcfedd_table_wrap_<?php esc_attr_e($table_id); ?>">
-	<?php bptcfedd_get_template('shortcodes/all-add-to-cart.php', BPTCFEDD_PUBLIC_TEMPLATE_PATH); ?>
-	<table class="bptcfedd-download-table">
-		<thead>
-			<tr>
-				<?php $table->bptcfedd_display_header(); ?>
-			</tr>
-		</thead>
-		<tbody>
-			<?php $table->bptcfedd_display_body(); ?>
-		</tbody>
-	</table>
+
+<?php do_action( 'bptcfedd_before_wrap', $table_id, $bptcfedd_tatts, $bptcfedd_table); ?>
+<div class="bptcfedd-table-wrap" id="bptcfedd_table_wrap_<?php echo esc_attr( $table_id ); ?>">
+	<?php bptcfedd_get_template( 'shortcodes/all-add-to-cart.php', BPTCFEDD_PUBLIC_TEMPLATE_PATH ); ?>
+	<div class="bptcfedd-table-parent">
+		<table class="bptcfedd-download-table">
+			<thead>
+				<tr>
+					<?php $bptcfedd_table->bptcfedd_display_header(); ?>
+				</tr>
+			</thead>
+			<tbody>
+				<?php $bptcfedd_table->bptcfedd_display_body(); ?>
+			</tbody>
+		</table>
+	</div>
 	<div class="bptcfedd-pagination">
-		<?php 
-		$table->bptcfedd_display_pagination();
+		<?php
+		$bptcfedd_table->bptcfedd_display_pagination();
 		wp_reset_postdata();
 		?>
 	</div>
 </div>
+<?php do_action( 'bptcfedd_after_wrap', $table_id, $bptcfedd_tatts, $bptcfedd_table); ?>

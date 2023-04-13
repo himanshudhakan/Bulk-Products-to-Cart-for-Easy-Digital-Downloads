@@ -1,5 +1,4 @@
 <?php
-
 /**
  * The shortcodes functionality of the plugin.
  *
@@ -12,7 +11,6 @@
 
 /**
  * The shortcodes functionality of the plugin.
- *
  *
  * @package    Bulk_Products_To_Cart_For_Edd
  * @subpackage Bulk_Products_To_Cart_For_Edd/public
@@ -42,39 +40,51 @@ class Bptcfedd_Shortcodes {
 	 * Initialize the class and set its properties.
 	 *
 	 * @since    1.0.0
-	 * @param    string    $plugin_name       The name of the plugin.
-	 * @param    string    $version    The version of this plugin.
+	 * @param    string $plugin_name       The name of the plugin.
+	 * @param    string $version    The version of this plugin.
 	 */
 	public function __construct( $plugin_name, $version ) {
 
 		$this->plugin_name = $plugin_name;
-		$this->version = $version;
+		$this->version     = $version;
 
 	}
 
 	/**
 	 * Display product table
-	 * 
+	 *
 	 * @since    1.0.0
-	 * @param    array    $atts    The shortcode attitudes.
+	 * @param    array $atts    The shortcode attitudes.
 	 */
-	public function bptcfedd_table_shortcode($atts){
+	public function bptcfedd_table_shortcode( $atts ) {
 
-		$atts = shortcode_atts( array(
-			'id' => '',
-		), $atts, 'bptcfedd_table' );
+		global $bptcfedd_tatts,$table_id,$bptcfedd_table;
+		$bptcfedd_tatts = $atts;
+
+		$atts = shortcode_atts(
+			array(
+				'id' => '',
+			),
+			$atts,
+			'bptcfedd_table'
+		);
 
 		if ( empty( $atts['id'] ) ) {
-			return '';
+			return;
 		}
-
-		global $bptcfedd_tatts,$table_id;
-		$bptcfedd_tatts = $atts;
-		$table_id = intval($atts['id']);
+		
+		$table_id       = intval( $atts['id'] );
+		$get_table      = get_post( $table_id );
+		if ( empty( $get_table ) ||
+				'publish' != $get_table->post_status ||
+					'bptcfedd_tables' != $get_table->post_type ) {
+			return;
+		}
+		$bptcfedd_table = new Bptcfedd_Product_Table( $table_id );
 
 		ob_start();
 
-		bptcfedd_get_template('shortcodes/bptcfedd-table.php', BPTCFEDD_PUBLIC_TEMPLATE_PATH);
+		bptcfedd_get_template( 'shortcodes/bptcfedd-table.php', BPTCFEDD_PUBLIC_TEMPLATE_PATH );
 
 		return ob_get_clean();
 
@@ -82,12 +92,12 @@ class Bptcfedd_Shortcodes {
 
 	/**
 	 * Add all hooks
-	 * 
-	 * @since 	1.0.0
+	 *
+	 * @since   1.0.0
 	 */
-	public function add_hooks(){
+	public function add_hooks() {
 
-		add_shortcode('bptcfedd_table', array($this, 'bptcfedd_table_shortcode') );
+		add_shortcode( 'bptcfedd_table', array( $this, 'bptcfedd_table_shortcode' ) );
 
 	}
 

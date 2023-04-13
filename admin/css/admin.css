@@ -12,6 +12,12 @@
 input[type="checkbox"].bptcfedd-simple-checkbox{
 	margin: 0;
 }
+.bptcfedd-shortcode-wrap{
+  display: inline-block;
+}
+.bptcfedd-shortcode-copy-wrap{
+  float: right;
+}
 
 /* tab css start */
 
@@ -19,6 +25,8 @@ input[type="checkbox"].bptcfedd-simple-checkbox{
   width: 70%;
   background-color: #dcdcde;
   border-radius: 5px 5px 5px 5px;
+  margin-top: 10px;
+  box-shadow: 1px 0px 8px -2px rgb(0 0 0 / 46%);
 }
 ul#bptcfedd-tabs-nav {
   list-style: none;
@@ -33,14 +41,19 @@ ul#bptcfedd-tabs-nav li {
   padding: 8px 10px;
   border-radius: 5px 5px 5px 5px;
   cursor: pointer;
+  margin-bottom: 0;
 }
 ul#bptcfedd-tabs-nav li:hover,
 ul#bptcfedd-tabs-nav li.active {
   background-color: #08E;
 }
+ul#bptcfedd-tabs-nav li:hover > a,
+ul#bptcfedd-tabs-nav li.active > a {
+  color: #fff;
+}
 #bptcfedd-tabs-nav li a {
   text-decoration: none;
-  color: #FFF;
+  color: #363636;
 }
 .bptcfedd-tab-content {
   padding: 10px;
