@@ -28,6 +28,15 @@ class Bptcfedd_Product_Table {
 	public $table_id;
 
 	/**
+	 * The shortcode attitudes.
+	 *
+	 * @since    1.0.0
+	 * @access   public
+	 * @var      array    $attitudes    The shortcode attitudes.
+	 */
+	public $attitudes;
+
+	/**
 	 * The table configs.
 	 *
 	 * @since    1.0.0
@@ -71,7 +80,9 @@ class Bptcfedd_Product_Table {
 	 */
 	public function __construct( $table_id ) {
 
+		global $bptcfedd_tatts;
 		$this->table_id = $table_id;
+		$this->attitudes = $bptcfedd_tatts; 
 		$this->configs  = bptcfedd_get_table_configs( $table_id );
 
 	}
@@ -120,6 +131,8 @@ class Bptcfedd_Product_Table {
 			<?php
 		}
 
+		do_action( 'bptcfedd_after_table_head', $this->table_id, $this->attitudes, $this);
+
 	}
 
 	/**
@@ -151,6 +164,7 @@ class Bptcfedd_Product_Table {
 				</tr>
 			<?php } ?>
 			<?php
+			do_action( 'bptcfedd_after_table_body', $this->table_id, $this->attitudes, $this);
 		}
 
 	}

@@ -58,6 +58,9 @@ class Bptcfedd_Shortcodes {
 	 */
 	public function bptcfedd_table_shortcode( $atts ) {
 
+		global $bptcfedd_tatts,$table_id,$bptcfedd_table;
+		$bptcfedd_tatts = $atts;
+
 		$atts = shortcode_atts(
 			array(
 				'id' => '',
@@ -69,9 +72,7 @@ class Bptcfedd_Shortcodes {
 		if ( empty( $atts['id'] ) ) {
 			return;
 		}
-
-		global $bptcfedd_tatts,$table_id,$bptcfedd_table;
-		$bptcfedd_tatts = $atts;
+		
 		$table_id       = intval( $atts['id'] );
 		$get_table      = get_post( $table_id );
 		if ( empty( $get_table ) ||

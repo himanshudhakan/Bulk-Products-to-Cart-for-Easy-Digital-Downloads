@@ -9,7 +9,7 @@
  * @wordpress-plugin
  * Plugin Name:       Bulk Products to Cart for Easy Digital Downloads
  * Plugin URI:        https://profiles.wordpress.org/himanshud/
- * Description:       -
+ * Description:       The Bulk Products to Cart for Easy Digital Downloads is an Add-On plugin of the Easy Digital Downloads (EDD) plugin. This powerful plugin allows users to display their products in a sleek and professional table layout with advanced features like bulk add-to-cart, pagination, etc.
  * Version:           1.0.0
  * Author:            Himanshu Dhakan
  * Author URI:        https://profiles.wordpress.org/himanshud

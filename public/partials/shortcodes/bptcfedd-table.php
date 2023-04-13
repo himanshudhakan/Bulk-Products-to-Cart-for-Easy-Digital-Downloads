@@ -16,6 +16,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 global $bptcfedd_tatts,$table_id,$bptcfedd_table;
 
 ?>
+
+<?php do_action( 'bptcfedd_before_wrap', $table_id, $bptcfedd_tatts, $bptcfedd_table); ?>
 <div class="bptcfedd-table-wrap" id="bptcfedd_table_wrap_<?php echo esc_attr( $table_id ); ?>">
 	<?php bptcfedd_get_template( 'shortcodes/all-add-to-cart.php', BPTCFEDD_PUBLIC_TEMPLATE_PATH ); ?>
 	<div class="bptcfedd-table-parent">
@@ -37,3 +39,4 @@ global $bptcfedd_tatts,$table_id,$bptcfedd_table;
 		?>
 	</div>
 </div>
+<?php do_action( 'bptcfedd_after_wrap', $table_id, $bptcfedd_tatts, $bptcfedd_table); ?>

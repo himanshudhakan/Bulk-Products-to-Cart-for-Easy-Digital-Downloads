@@ -21,7 +21,9 @@ if ( ! isset( $bptcfedd_table->configs['conditions']['all_to_cart'] ) ) {
 }
 
 ?>
+<?php do_action( 'bptcfedd_before_alladdtocart_wrap', $table_id, $bptcfedd_tatts, $bptcfedd_table); ?>
 <div class="bptcfedd-alladdtocart-wrap">
+	<?php do_action( 'bptcfedd_before_alladdtocart_btn', $table_id, $bptcfedd_tatts,  $bptcfedd_table); ?>
 	<?php if ( isset( $bptcfedd_table->configs['columns']['checkbox'] ) ) { ?>
 		<input type="checkbox" name="bptcfedd_alladdtocart" class="bptcfedd-alladdtocart-selectall" />
 	<?php } ?>
@@ -29,4 +31,6 @@ if ( ! isset( $bptcfedd_table->configs['conditions']['all_to_cart'] ) ) {
 		<span class="bptcfedd-alladdtocart"><?php echo esc_html( $button_lable ); ?></span>
 		<span class="edd-loading" aria-label="<?php esc_html_e( 'Loading', 'bptcfedd' ); ?>"></span>
 	</button>
+	<?php do_action( 'bptcfedd_after_alladdtocart_btn', $table_id, $bptcfedd_tatts,  $bptcfedd_table); ?>
 </div>
+<?php do_action( 'bptcfedd_after_alladdtocart_wrap', $table_id, $bptcfedd_tatts, $bptcfedd_table); ?>
