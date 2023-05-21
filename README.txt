@@ -2,7 +2,7 @@
 Contributors: himanshud
 Tags: edd-bulk-add-to-cart, bulk-add-to-cart, product-table, edd-product-table, bulk-products-to-cart-for-edd, bulk-add-to-cart-easy-digital-downloads, all-add-to-cart, edd-all-add-to-cart, easy-digital-downloads-all-add-to-cart, easy-digital-downloads, easy-digital-downloads-table, easy-digital-downloads-product-table
 Requires at least: 4.9
-Tested up to: 6.2
+Tested up to: 6.2.2
 Requires PHP: 5.6
 Stable Tag: 1.0.0
 License: GPLv2 or later

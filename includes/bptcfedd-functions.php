@@ -374,7 +374,9 @@ function bptcfedd_add_admin_notice( $message, $type ) {
 		return;
 	}
 
-	$notices = isset( $_SESSION['bptcfedd_notices'] ) ? $_SESSION['bptcfedd_notices'] : array();
+	$notices = isset( $_SESSION['bptcfedd_notices'] ) ? 
+	bptcfedd_sanitize_text_field( $_SESSION['bptcfedd_notices'] ) :
+	array();
 
 	$notices[] = array(
 		'message' => $message,
@@ -392,7 +394,9 @@ function bptcfedd_add_admin_notice( $message, $type ) {
  */
 function bptcfedd_print_admin_notices() {
 
-	$notices = isset( $_SESSION['bptcfedd_notices'] ) ? $_SESSION['bptcfedd_notices'] : array();
+	$notices = isset( $_SESSION['bptcfedd_notices'] ) ? 
+	bptcfedd_sanitize_text_field( $_SESSION['bptcfedd_notices'] ) :
+	array();
 
 	if ( ! empty( $notices ) ) {
 		foreach ( $notices as $key => $notice ) {

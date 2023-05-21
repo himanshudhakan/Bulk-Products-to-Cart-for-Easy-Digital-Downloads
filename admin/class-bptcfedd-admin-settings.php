@@ -654,8 +654,9 @@ class Bptcfedd_Admin_Settings {
 		}
 
 		$old_settings           = get_option( 'bptcfedd_settings' );
-		$settings               = isset( $_POST['bptcfedd_settings'] ) ? $_POST['bptcfedd_settings'] : array();
-		$sani_bptcfedd_settings = bptcfedd_sanitize_text_field( $settings );
+		$sani_bptcfedd_settings = isset( $_POST['bptcfedd_settings'] ) ? 
+		bptcfedd_sanitize_text_field( $_POST['bptcfedd_settings'] ) :
+		array();
 		$updated                = update_option( 'bptcfedd_settings', $sani_bptcfedd_settings );
 
 		if ( $updated ||

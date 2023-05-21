@@ -288,8 +288,9 @@ class Bptcfedd_Product_Table {
 
 		?>
 		<?php if ( ! empty( $get_cats ) ) { ?>
+			<?php $cats = implode( ', ', $get_cats ); ?>
 			<div class="bptcfedd-cats-wrap">
-				<p><?php echo implode( ', ', $get_cats ); ?></p>
+				<p><?php echo esc_html( $cats ); ?></p>
 			</div>
 		<?php } ?>
 		<?php
@@ -310,8 +311,9 @@ class Bptcfedd_Product_Table {
 
 		?>
 		<?php if ( ! empty( $get_tags ) ) { ?>
+			<?php $tags = implode( ', ', $get_tags ); ?>
 			<div class="bptcfedd-tags-wrap">
-				<p><?php echo implode( ', ', $get_tags ); ?></p>
+				<p><?php echo esc_html( $tags ); ?></p>
 			</div>
 		<?php } ?>
 		<?php

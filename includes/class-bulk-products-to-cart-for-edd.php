@@ -218,7 +218,16 @@ class Bulk_Products_To_Cart_For_Edd {
 
 		?>
 		<div class="error notice is-dismissible">
-			<p><?php echo $notice; ?></p>
+			<p>
+			<?php 
+			echo wp_kses( 
+				$notice, 
+			 	array(
+		        	'strong' => array(),
+		    	)
+			);
+    		?>
+    		</p>
 		</div>
 		<?php
 	}
