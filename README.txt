@@ -1,4 +1,4 @@
-=== Bulk Products to Cart for Easy Digital Downloads ===
+=== Bulk Products to Cart for EDD ===
 Contributors: himanshud
 Tags: edd-bulk-add-to-cart, bulk-add-to-cart, product-table, edd-product-table, bulk-products-to-cart-for-edd, bulk-add-to-cart-easy-digital-downloads, all-add-to-cart, edd-all-add-to-cart, easy-digital-downloads-all-add-to-cart, easy-digital-downloads, easy-digital-downloads-table, easy-digital-downloads-product-table
 Requires at least: 4.9
